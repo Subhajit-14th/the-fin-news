@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:the_fin_news/view/RootScreen/root_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -14,6 +15,15 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     _startAnimation();
+    Future.delayed(
+      Duration(seconds: 4),
+      () {
+        if (mounted) {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => RootScreen()));
+        }
+      },
+    );
   }
 
   void _startAnimation() {
