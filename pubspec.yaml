@@ -13,6 +13,21 @@ dependencies:
 
   cupertino_icons: ^1.0.8
   flutter_native_splash: ^2.4.4
+  provider: ^6.1.2
+  http: ^1.2.2
+  get_it: ^8.0.3
+  intl: ^0.20.1
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  path: ^1.9.1
+  path_provider: ^2.1.5
+  multi_select_flutter: ^4.1.3
+  image_picker: ^1.1.2
+  carousel_slider: ^5.0.0
+  smooth_page_indicator: ^1.2.0+3
+
+dependency_overrides:
+  path: 1.9.1
 
 dev_dependencies:
   flutter_test:
@@ -27,6 +42,8 @@ flutter:
   assets:
     - assets/
     - assets/app_logo/
+    - assets/fonts/
+    - assets/icon_pic/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
@@ -39,15 +56,15 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
+  fonts:
+    - family: Raleway
+      fonts:
+        - asset: assets/fonts/Raleway-Regular.ttf
+    #       - asset: fonts/Schyler-Italic.ttf
+    #         style: italic
+    - family: Lato
+      fonts:
+        - asset: assets/fonts/Lato-Regular.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #

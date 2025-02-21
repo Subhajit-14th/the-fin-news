@@ -1,0 +1,73 @@
+name: Liquere Brooze CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build and Upload APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.27.0
+          channel: stable
+
+      - name: Install Dependencies
+        run: flutter pub get
+
+      - name: Extract App Name from pubspec.yaml
+        id: app_name
+        run: |
+          APP_NAME=$(grep 'name:' pubspec.yaml | head -n 1 | awk '{print $2}')
+          echo "APP_NAME=$APP_NAME" >> $GITHUB_ENV
+
+      - name: Build Apk
+        run: flutter build apk --release
+
+      - name: Rename APK File
+        run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/${{ env.APP_NAME }}-release.apk
+
+      - name: Install Google Drive API Client
+        run: pip install --upgrade google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client
+
+      - name: Upload APK to Google Drive
+        env:
+          GDRIVE_CREDENTIALS: ${{ secrets.GDRIVE_CREDENTIALS }}
+        run: |
+          echo "$GDRIVE_CREDENTIALS" > creds.json
+
+          python - <<EOF
+          from googleapiclient.discovery import build
+          from googleapiclient.http import MediaFileUpload
+          from google.oauth2 import service_account
+          import json
+          import os
+
+          SCOPES = ["https://www.googleapis.com/auth/drive.file"]
+          SERVICE_ACCOUNT_FILE = "creds.json"
+          FOLDER_ID = "1Oehisfr1r7Z1UaZTjEwHNLLSdMpgecX0"  # Replace with your actual Google Drive folder ID
+
+          credentials = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+          service = build("drive", "v3", credentials=credentials)
+
+          app_name = os.getenv("APP_NAME")
+          file_name = f"{app_name}-release.apk"
+          file_path = f"build/app/outputs/flutter-apk/{file_name}"
+
+          file_metadata = {
+              "name": file_name,
+              "parents": [FOLDER_ID]
+          }
+          media = MediaFileUpload(file_path, mimetype="application/vnd.android.package-archive")
+          file = service.files().create(body=file_metadata, media_body=media, fields="id").execute()
+
+          print("Uploaded APK File ID:", file.get("id"))
+          EOF
