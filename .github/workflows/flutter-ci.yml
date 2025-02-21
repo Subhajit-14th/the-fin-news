@@ -1,4 +1,4 @@
-name: Liquere Brooze CI/CD
+name: The Fin News CI/CD
 
 on:
   push:
