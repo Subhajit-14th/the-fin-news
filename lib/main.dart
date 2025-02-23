@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:the_fin_news/services/dependency_services.dart';
 import 'package:the_fin_news/utils/assets/app_colors.dart';
 import 'package:the_fin_news/view/SplashScreen/splash_screen.dart';
+import 'package:the_fin_news/viewModel/home_provider.dart';
 import 'package:the_fin_news/viewModel/live_news_provider.dart';
 import 'package:the_fin_news/viewModel/screen_route_provider.dart';
 
@@ -15,10 +17,14 @@ void main() {
     statusBarIconBrightness: Brightness.light, // Light or dark icons
   ));
 
+  /// set dependency injection
+  setupServiceLocator();
+
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ScreenRouteProvider()),
+        ChangeNotifierProvider(create: (context) => HomeProvider()),
         ChangeNotifierProvider(create: (context) => LiveNewsProvider()),
       ],
       child: const MyApp(),

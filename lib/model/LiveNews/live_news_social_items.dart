@@ -1,8 +1,8 @@
-class LineNewsSocialItems {
+class HomeNewsSocialItems {
   String liveNewsSocialImageUrl;
   String title;
 
-  LineNewsSocialItems({
+  HomeNewsSocialItems({
     required this.liveNewsSocialImageUrl,
     required this.title,
   });
