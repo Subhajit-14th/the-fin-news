@@ -15,29 +15,76 @@ class DrawerScreen extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(height: height * 0.05),
+          Padding(
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: 10,
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: AppColor.primaryColor,
+                      radius: 42,
+                      child: CircleAvatar(
+                        radius: 40,
+                        backgroundImage: NetworkImage(
+                          'https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D',
+                        ),
+                      ),
+                    ),
+                    Text(
+                      'Example User',
+                      style: TextStyle(
+                        color: AppColor.textColorDark,
+                        fontSize: 14,
+                        fontFamily: 'Lato',
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+                Icon(
+                  Icons.exit_to_app_rounded,
+                  color: Colors.red,
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: height * 0.02),
+
+          /// Drawer items
+          drawerItem(
+            context: context,
+            image: 'assets/icon_pic/home.png',
+            newsName: 'Home',
+            index: 0,
+          ),
           drawerItem(
             context: context,
             image: 'assets/icon_pic/smartphone.png',
             newsName: 'Live News',
-            index: 0,
+            index: 1,
           ),
           drawerItem(
             context: context,
             image: 'assets/icon_pic/report.png',
             newsName: 'Reports',
-            index: 1,
+            index: 2,
           ),
           drawerItem(
             context: context,
             image: 'assets/icon_pic/market_data.png',
             newsName: 'Market Data',
-            index: 2,
+            index: 3,
           ),
           drawerItem(
             context: context,
             image: 'assets/icon_pic/courses.png',
             newsName: 'Courses',
-            index: 3,
+            index: 4,
           ),
         ],
       ),

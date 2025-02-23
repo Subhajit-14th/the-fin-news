@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Duration(seconds: 4),
       () {
         if (mounted) {
-          Navigator.push(
+          Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => RootScreen()));
         }
       },

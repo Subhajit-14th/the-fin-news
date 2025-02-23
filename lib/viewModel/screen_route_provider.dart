@@ -5,6 +5,7 @@ class ScreenRouteProvider extends ChangeNotifier {
   int get currentCount => _currntCount;
 
   final List<String> _screenNames = [
+    'Home',
     'Live News',
     'Reports',
     'Market Data',

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:the_fin_news/utils/assets/app_colors.dart';
+import 'package:the_fin_news/view/HomeScreen/home_screen.dart';
 import 'package:the_fin_news/view/LiveNews/live_news_screen.dart';
 import 'package:the_fin_news/view/RootScreen/drawer_screen.dart';
 import 'package:the_fin_news/viewModel/screen_route_provider.dart';
@@ -29,6 +30,7 @@ class RootScreen extends StatelessWidget {
       ),
       drawer: const DrawerScreen(),
       body: [
+        HomeScreen(),
         LiveNewsScreen(),
         Container(
           height: height,
@@ -65,27 +67,33 @@ class RootScreen extends StatelessWidget {
           children: [
             bottomNavigationBarButton(
               context: context,
+              image: 'assets/icon_pic/home.png',
+              newsName: 'Home',
+              index: 0,
+            ),
+            bottomNavigationBarButton(
+              context: context,
               image: 'assets/icon_pic/smartphone.png',
               newsName: 'Live News',
-              index: 0,
+              index: 1,
             ),
             bottomNavigationBarButton(
               context: context,
               image: 'assets/icon_pic/report.png',
               newsName: 'Reports',
-              index: 1,
+              index: 2,
             ),
             bottomNavigationBarButton(
               context: context,
               image: 'assets/icon_pic/market_data.png',
               newsName: 'Market Data',
-              index: 2,
+              index: 3,
             ),
             bottomNavigationBarButton(
               context: context,
               image: 'assets/icon_pic/courses.png',
               newsName: 'Courses',
-              index: 3,
+              index: 4,
             ),
           ],
         ),
