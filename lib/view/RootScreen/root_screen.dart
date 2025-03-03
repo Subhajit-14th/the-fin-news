@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:the_fin_news/utils/assets/app_colors.dart';
+import 'package:the_fin_news/view/CoursesScreen/courses_screen.dart';
 import 'package:the_fin_news/view/HomeScreen/home_screen.dart';
 import 'package:the_fin_news/view/LiveNews/live_news_screen.dart';
 import 'package:the_fin_news/view/RootScreen/drawer_screen.dart';
@@ -42,11 +43,7 @@ class RootScreen extends StatelessWidget {
           width: width,
           color: Colors.amber,
         ),
-        Container(
-          height: height,
-          width: width,
-          color: Colors.red,
-        ),
+        CoursesScreen(),
       ][screenRouteProvider.currentCount],
       bottomNavigationBar: Container(
         padding: EdgeInsets.only(top: 10, left: 16, right: 16),
