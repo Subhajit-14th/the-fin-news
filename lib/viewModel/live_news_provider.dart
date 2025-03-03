@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:the_fin_news/model/LiveNews/live_news_items.dart';
-import 'package:the_fin_news/model/LiveNews/live_news_social_items.dart';
-import 'package:the_fin_news/model/LiveNews/populer_course_item.dart';
 
 class LiveNewsProvider extends ChangeNotifier {
   final List<LiveNewsItems> _liveNewsItems = [
@@ -21,7 +19,7 @@ class LiveNewsProvider extends ChangeNotifier {
 
   List<LiveNewsItems> get liveNewsItems => _liveNewsItems;
 
-  List<String> _liveNewsCategory = [
+  final List<String> _liveNewsCategory = [
     'All',
     'Results',
     'Block Deals',
