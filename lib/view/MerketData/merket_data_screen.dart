@@ -119,10 +119,18 @@ class MerketDataScreen extends StatelessWidget {
                     SizedBox(height: 10),
 
                     /// Fii Cash
-                    Card(
-                      elevation: 5,
-                      shape: RoundedRectangleBorder(
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 8),
+                      decoration: BoxDecoration(
+                        color: Color(0xFF2323FF),
                         borderRadius: BorderRadius.circular(14),
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppColor.textColorDark.withAlpha(50),
+                            blurRadius: 5,
+                            spreadRadius: 2,
+                          ),
+                        ],
                       ),
                       child: ListTile(
                         tileColor: AppColor.tertiaryColor,
@@ -132,7 +140,7 @@ class MerketDataScreen extends StatelessWidget {
                             Text(
                               'FII Cash',
                               style: TextStyle(
-                                color: AppColor.textColorDark,
+                                color: AppColor.textColorLight,
                                 fontFamily: 'Lato',
                                 fontWeight: FontWeight.bold,
                               ),
@@ -143,8 +151,8 @@ class MerketDataScreen extends StatelessWidget {
                                 color: marketDataProvider.marketData[index]
                                             ['fiiCash'] <
                                         0
-                                    ? Colors.red
-                                    : Colors.green,
+                                    ? Color(0xffFF1818)
+                                    : Color(0xFF39FF14),
                                 fontFamily: 'Lato',
                                 fontWeight: FontWeight.bold,
                               ),
@@ -154,19 +162,27 @@ class MerketDataScreen extends StatelessWidget {
                         trailing: Text(
                           'Details >',
                           style: TextStyle(
-                            color: AppColor.textColorDark,
+                            color: AppColor.textColorLight,
                             fontSize: 18,
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(height: 2),
+                    SizedBox(height: 10),
 
                     /// Dii Cash
-                    Card(
-                      elevation: 5,
-                      shape: RoundedRectangleBorder(
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 8),
+                      decoration: BoxDecoration(
+                        color: Color(0xFF2323FF),
                         borderRadius: BorderRadius.circular(14),
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppColor.textColorDark.withAlpha(50),
+                            blurRadius: 5,
+                            spreadRadius: 2,
+                          ),
+                        ],
                       ),
                       child: ListTile(
                         tileColor: AppColor.tertiaryColor,
@@ -176,7 +192,7 @@ class MerketDataScreen extends StatelessWidget {
                             Text(
                               'DII Cash',
                               style: TextStyle(
-                                color: AppColor.textColorDark,
+                                color: AppColor.textColorLight,
                                 fontFamily: 'Lato',
                                 fontWeight: FontWeight.bold,
                               ),
@@ -198,16 +214,16 @@ class MerketDataScreen extends StatelessWidget {
                         trailing: Text(
                           'Details >',
                           style: TextStyle(
-                            color: AppColor.textColorDark,
+                            color: AppColor.textColorLight,
                             fontSize: 18,
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(height: 2),
+                    SizedBox(height: 10),
 
                     Padding(
-                      padding: const EdgeInsets.only(left: 14),
+                      padding: const EdgeInsets.only(left: 24),
                       child: Row(
                         spacing: 20,
                         children: [

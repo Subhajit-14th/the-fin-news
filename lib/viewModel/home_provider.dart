@@ -1,16 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:the_fin_news/model/HomeScreenModels/home_screen_carosel_slider_model.dart';
 import 'package:the_fin_news/model/LiveNews/live_news_social_items.dart';
 import 'package:the_fin_news/model/LiveNews/populer_course_item.dart';
 
 class HomeProvider extends ChangeNotifier {
-  final List<String> _homeCarouselImageUrls = [
-    'https://snworksceo.imgix.net/dth/73df7e31-b392-4681-a40b-c70ab43cc1d7.sized-1000x1000.jpg?w=1000',
-    'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Pollock_to_Hussey.jpg/1200px-Pollock_to_Hussey.jpg',
-    'https://thephysiocompany.co.uk/wp-content/uploads/football.jpg',
-    'https://bsmedia.business-standard.com/_media/bs/img/article/2023-08/20/full/1692544925-8108.jpg?im=FeatureCrop,size=(826,465)',
+  final List<HomeScreenCaroselSliderModel> _homeCarouselImageUrls = [
+    HomeScreenCaroselSliderModel(
+      image:
+          'https://snworksceo.imgix.net/dth/73df7e31-b392-4681-a40b-c70ab43cc1d7.sized-1000x1000.jpg?w=1000',
+      title: 'The Court Diclearing the Case, The Court Diclearing the Case',
+    ),
+    HomeScreenCaroselSliderModel(
+      image:
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Pollock_to_Hussey.jpg/1200px-Pollock_to_Hussey.jpg',
+      title: 'The cricket match is going on, The cricket match is going on',
+    ),
+    HomeScreenCaroselSliderModel(
+      image: 'https://thephysiocompany.co.uk/wp-content/uploads/football.jpg',
+      title: 'Football match is going on, Football match is going on',
+    ),
+    HomeScreenCaroselSliderModel(
+      image:
+          'https://bsmedia.business-standard.com/_media/bs/img/article/2023-08/20/full/1692544925-8108.jpg?im=FeatureCrop,size=(826,465)',
+      title: 'India is winning the match, India is winning the match',
+    ),
   ];
 
-  List<String> get homeCarouselImageUrls => _homeCarouselImageUrls;
+  List<HomeScreenCaroselSliderModel> get homeCarouselImageUrls =>
+      _homeCarouselImageUrls;
 
   final List<PopulerCourseItem> _populerCourses = [
     PopulerCourseItem(
