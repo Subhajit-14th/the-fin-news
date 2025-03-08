@@ -9,6 +9,7 @@ import 'package:the_fin_news/viewModel/home_provider.dart';
 import 'package:the_fin_news/viewModel/live_news_provider.dart';
 import 'package:the_fin_news/viewModel/merketdata_provider.dart';
 import 'package:the_fin_news/viewModel/recently_courses_provider.dart';
+import 'package:the_fin_news/viewModel/reports_provider.dart';
 import 'package:the_fin_news/viewModel/screen_route_provider.dart';
 
 void main() {
@@ -32,6 +33,7 @@ void main() {
         ChangeNotifierProvider(create: (context) => RecentlyCoursesProvider()),
         ChangeNotifierProvider(create: (context) => CourseProvider()),
         ChangeNotifierProvider(create: (context) => MerketdataProvider()),
+        ChangeNotifierProvider(create: (context) => ReportsProvider()),
       ],
       child: const MyApp(),
     ),

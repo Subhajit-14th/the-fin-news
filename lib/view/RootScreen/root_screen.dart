@@ -5,6 +5,7 @@ import 'package:the_fin_news/view/CoursesScreen/courses_screen.dart';
 import 'package:the_fin_news/view/HomeScreen/home_screen.dart';
 import 'package:the_fin_news/view/LiveNews/live_news_screen.dart';
 import 'package:the_fin_news/view/MerketData/merket_data_screen.dart';
+import 'package:the_fin_news/view/ReportsScreen/reports_screen.dart';
 import 'package:the_fin_news/view/RootScreen/drawer_screen.dart';
 import 'package:the_fin_news/viewModel/screen_route_provider.dart';
 
@@ -14,8 +15,6 @@ class RootScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenRouteProvider = Provider.of<ScreenRouteProvider>(context);
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: AppColor.textColorLight,
       appBar: AppBar(
@@ -34,11 +33,7 @@ class RootScreen extends StatelessWidget {
       body: [
         HomeScreen(),
         LiveNewsScreen(),
-        Container(
-          height: height,
-          width: width,
-          color: Colors.green,
-        ),
+        ReportsScreen(),
         MerketDataScreen(),
         CoursesScreen(),
       ][screenRouteProvider.currentCount],
