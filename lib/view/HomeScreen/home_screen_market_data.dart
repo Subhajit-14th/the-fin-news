@@ -9,7 +9,6 @@ class HomeScreenMarketData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final marketDataProvider = Provider.of<MerketdataProvider>(context);
-    final height = MediaQuery.of(context).size.height;
     return SizedBox(
       height: 255,
       child: ListView.builder(

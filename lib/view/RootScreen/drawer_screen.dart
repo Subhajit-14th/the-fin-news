@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:the_fin_news/utils/assets/app_colors.dart';
+import 'package:the_fin_news/view/LoginScreen/login_screen.dart';
 import 'package:the_fin_news/viewModel/screen_route_provider.dart';
 
 class DrawerScreen extends StatelessWidget {
@@ -86,6 +87,44 @@ class DrawerScreen extends StatelessWidget {
             newsName: 'Courses',
             index: 4,
           ),
+          SizedBox(height: height * 0.02),
+
+          InkWell(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => LoginPageScreen()));
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              spacing: 14,
+              children: [
+                Text(
+                  'Login',
+                  style: TextStyle(
+                    color: AppColor.textColorDark,
+                    fontSize: 16,
+                    fontFamily: 'Lato',
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Icon(
+                  Icons.login_rounded,
+                  color: AppColor.primaryColor,
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: height * 0.02),
+
+          // Text(
+          //   'Version 1.0.0',
+          //   style: TextStyle(
+          //     color: AppColor.textColorDark,
+          //     fontSize: 14,
+          //     fontFamily: 'Lato',
+          //     fontWeight: FontWeight.bold,
+          //   ),
+          // ),
         ],
       ),
     );
