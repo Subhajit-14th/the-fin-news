@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:the_fin_news/utils/assets/app_colors.dart';
 import 'package:the_fin_news/view/HomeScreen/home_screen_carosel_slider.dart';
+import 'package:the_fin_news/view/HomeScreen/home_screen_market_data.dart';
 import 'package:the_fin_news/view/HomeScreen/home_screen_populer_courses.dart';
 import 'package:the_fin_news/view/HomeScreen/home_screen_recently_added_courses.dart';
+import 'package:the_fin_news/view/HomeScreen/home_screen_reports_data.dart';
+import 'package:the_fin_news/view/HomeScreen/live_news_section.dart';
 import 'package:the_fin_news/viewModel/home_provider.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -108,6 +111,120 @@ class HomeScreen extends StatelessWidget {
               index: i,
             ),
           ],
+
+          /// Live News heading
+          Padding(
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Live News',
+                  style: TextStyle(
+                    color: AppColor.textColorDark,
+                    fontSize: 18,
+                    fontFamily: 'Raleway',
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'See All',
+                      style: TextStyle(
+                        color: AppColor.primaryColor,
+                        fontSize: 18,
+                        fontFamily: 'Raleway',
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Icon(
+                      Icons.arrow_forward_rounded,
+                      color: AppColor.primaryColor,
+                      size: 18,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          HomeScreenLiveNews(),
+
+          /// Reports heading
+          Padding(
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Reports',
+                  style: TextStyle(
+                    color: AppColor.textColorDark,
+                    fontSize: 18,
+                    fontFamily: 'Raleway',
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'See All',
+                      style: TextStyle(
+                        color: AppColor.primaryColor,
+                        fontSize: 18,
+                        fontFamily: 'Raleway',
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Icon(
+                      Icons.arrow_forward_rounded,
+                      color: AppColor.primaryColor,
+                      size: 18,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          HomeScreenReports(),
+
+          /// Market Data Heading
+          Padding(
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Market Data',
+                  style: TextStyle(
+                    color: AppColor.textColorDark,
+                    fontSize: 18,
+                    fontFamily: 'Raleway',
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'See All',
+                      style: TextStyle(
+                        color: AppColor.primaryColor,
+                        fontSize: 18,
+                        fontFamily: 'Raleway',
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Icon(
+                      Icons.arrow_forward_rounded,
+                      color: AppColor.primaryColor,
+                      size: 18,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          HomeScreenMarketData(),
 
           /// Contact With Us
           Padding(
