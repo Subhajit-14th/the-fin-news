@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:the_fin_news/controllers/ReportsController/reports_controller.dart';
+import 'package:the_fin_news/model/ReportsModels/reports_api_res_model.dart';
 import 'package:the_fin_news/model/ReportsModels/reports_model.dart';
 
 class ReportsProvider extends ChangeNotifier {
@@ -39,4 +41,27 @@ class ReportsProvider extends ChangeNotifier {
     ),
   ];
   List<ReportsModel> get reportsItems => _reportsItems;
+
+  ReportsController _reportsController = ReportsController();
+  ReportsApiResModel reportsApiResModel = ReportsApiResModel();
+
+  Future<void> fetchReports() async {
+    reportsApiResModel = await _reportsController.getAllReports();
+    if (reportsApiResModel.status == 200) {
+      _reportsItems.clear();
+      reportsApiResModel.record?.forEach(
+        (element) {
+          _reportsItems.add(ReportsModel(
+            reportsImage: element.reportImage ?? '',
+            reprtsTitle: element.reportTitle ?? '',
+            reportsDuration: '5 min ago',
+            reportsDescription: element.reportDescription ?? '',
+          ));
+        },
+      );
+      notifyListeners();
+    } else {
+      debugPrint('Failed to fetch reports: ${reportsApiResModel.msg}');
+    }
+  }
 }
