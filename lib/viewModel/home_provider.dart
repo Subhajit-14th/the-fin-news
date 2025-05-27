@@ -1,62 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:the_fin_news/controllers/HomeController/home_controller.dart';
+import 'package:the_fin_news/model/HomeScreenModels/home_screen_api_res_model.dart';
 import 'package:the_fin_news/model/HomeScreenModels/home_screen_carosel_slider_model.dart';
 import 'package:the_fin_news/model/LiveNews/live_news_social_items.dart';
 import 'package:the_fin_news/model/LiveNews/populer_course_item.dart';
 
 class HomeProvider extends ChangeNotifier {
-  final List<HomeScreenCaroselSliderModel> _homeCarouselImageUrls = [
-    HomeScreenCaroselSliderModel(
-      image:
-          'https://snworksceo.imgix.net/dth/73df7e31-b392-4681-a40b-c70ab43cc1d7.sized-1000x1000.jpg?w=1000',
-      title: 'The Court Diclearing the Case, The Court Diclearing the Case',
-    ),
-    HomeScreenCaroselSliderModel(
-      image:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Pollock_to_Hussey.jpg/1200px-Pollock_to_Hussey.jpg',
-      title: 'The cricket match is going on, The cricket match is going on',
-    ),
-    HomeScreenCaroselSliderModel(
-      image: 'https://thephysiocompany.co.uk/wp-content/uploads/football.jpg',
-      title: 'Football match is going on, Football match is going on',
-    ),
-    HomeScreenCaroselSliderModel(
-      image:
-          'https://bsmedia.business-standard.com/_media/bs/img/article/2023-08/20/full/1692544925-8108.jpg?im=FeatureCrop,size=(826,465)',
-      title: 'India is winning the match, India is winning the match',
-    ),
-  ];
-
+  List<HomeScreenCaroselSliderModel> _homeCarouselImageUrls = [];
   List<HomeScreenCaroselSliderModel> get homeCarouselImageUrls =>
       _homeCarouselImageUrls;
 
-  final List<PopulerCourseItem> _populerCourses = [
-    PopulerCourseItem(
-      populerImageUrl:
-          'https://instructor-academy.onlinecoursehost.com/content/images/2023/05/How-to-Create-an-Online-Course-For-Free--Complete-Guide--6.jpg',
-      populerCourseTitle: 'C-04 CURRENT AFFAIRES 25-26',
-      populerCoursePrice: '₹ 5,009',
-    ),
-    PopulerCourseItem(
-      populerImageUrl:
-          'https://wealthcreator.co.in/wp-content/uploads/2022/12/Free-Online-Courses-with-Certificates.jpg',
-      populerCourseTitle: 'C-04 CURRENT AFFAIRES 25-26',
-      populerCoursePrice: '₹ 5,009',
-    ),
-    PopulerCourseItem(
-      populerImageUrl:
-          'https://www.educourse.co.za/wp-content/uploads/2024/06/IT-Courses-for-Beginners.jpg',
-      populerCourseTitle: 'C-04 CURRENT AFFAIRES 25-26',
-      populerCoursePrice: '₹ 5,009',
-    ),
-    PopulerCourseItem(
-      populerImageUrl:
-          'https://images.shiksha.com/mediadata/images/articles/1576227666phpqUHpt1.jpeg',
-      populerCourseTitle: 'C-04 CURRENT AFFAIRES 25-26',
-      populerCoursePrice: '₹ 5,009',
-    ),
-  ];
-
+  final List<PopulerCourseItem> _populerCourses = [];
   List<PopulerCourseItem> get populerCourses => _populerCourses;
+
+  final List<PopulerCourseItem> _recenthlyAddedCourses = [];
+  List<PopulerCourseItem> get recenthlyAddedCourses => _recenthlyAddedCourses;
 
   final List<HomeNewsSocialItems> _liveNewsSocialItems = [
     HomeNewsSocialItems(
@@ -84,6 +42,61 @@ class HomeProvider extends ChangeNotifier {
 
   void updateIndex(int index) {
     _activeIndex = index;
+    notifyListeners();
+  }
+
+  bool _isHomeDataLoading = false;
+  bool get isHomeDataLoading => _isHomeDataLoading;
+
+  HomeApiResModel homeApiResModel = HomeApiResModel();
+  final HomeController _homeController = HomeController();
+
+  void getHomeData() async {
+    _isHomeDataLoading = true;
+    notifyListeners();
+    homeApiResModel = await _homeController.fetchHomeData();
+    if (homeApiResModel.status == 200) {
+      debugPrint("Home data fetched successfully: ${homeApiResModel.message}");
+      _homeCarouselImageUrls.clear();
+      _populerCourses.clear();
+      _recenthlyAddedCourses.clear();
+      homeApiResModel.banner?.forEach(
+        (element) {
+          debugPrint("Banner ID: ${element.id}, Image: ${element.bannerImg}");
+          _homeCarouselImageUrls.add(
+            HomeScreenCaroselSliderModel(
+              image: element.bannerImg ?? '',
+              title: '',
+            ),
+          );
+        },
+      );
+
+      homeApiResModel.popularCourses?.forEach(
+        (element) {
+          debugPrint("Popular Course ID: ${element.id}, Title: ");
+          _populerCourses.add(PopulerCourseItem(
+              populerImageUrl: element.coursePhoto ?? '',
+              populerCourseTitle: element.courseTitle ?? '',
+              populerCoursePrice: element.courseRegularPrice ?? ''));
+        },
+      );
+
+      homeApiResModel.recentlyCourses?.forEach(
+        (element) {
+          debugPrint("Popular Course ID: ${element.id}, Title: ");
+          _recenthlyAddedCourses.add(PopulerCourseItem(
+              populerImageUrl: element.coursePhoto ?? '',
+              populerCourseTitle: element.courseTitle ?? '',
+              populerCoursePrice: element.courseRegularPrice ?? ''));
+        },
+      );
+      _isHomeDataLoading = false;
+      notifyListeners();
+    } else {
+      debugPrint("Failed to fetch home data: ${homeApiResModel.message}");
+      _isHomeDataLoading = false;
+    }
     notifyListeners();
   }
 }
