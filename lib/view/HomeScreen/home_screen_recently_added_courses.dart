@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:the_fin_news/utils/assets/app_colors.dart';
@@ -22,7 +23,8 @@ class HomeScreenRecentlyAddedCourses extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => HomeScreenRecentlyCoursesDetails(
-              pageTitle: homeProvider.populerCourses[index].populerCourseTitle,
+              pageTitle:
+                  homeProvider.recenthlyAddedCourses[index].populerCourseTitle,
             ),
           ),
         );
@@ -51,9 +53,16 @@ class HomeScreenRecentlyAddedCourses extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(14),
                 child: Image.network(
-                  homeProvider.populerCourses[index].populerImageUrl,
+                  homeProvider.recenthlyAddedCourses[index].populerImageUrl,
                   height: 120,
                   fit: BoxFit.fill,
+                  errorBuilder: (context, error, stackTrace) =>
+                      CachedNetworkImage(
+                    imageUrl:
+                        'https://dhanvan.in/public/images/upload/prod_default.png',
+                    height: 200,
+                    fit: BoxFit.fill,
+                  ),
                 ),
               ),
             ),
@@ -107,7 +116,8 @@ class HomeScreenRecentlyAddedCourses extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Text(
-                      homeProvider.populerCourses[index].populerCourseTitle,
+                      homeProvider
+                          .recenthlyAddedCourses[index].populerCourseTitle,
                       style: TextStyle(
                         color: AppColor.textColorDark,
                         fontSize: 16,
@@ -122,7 +132,8 @@ class HomeScreenRecentlyAddedCourses extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Text(
-                      homeProvider.populerCourses[index].populerCoursePrice,
+                      homeProvider
+                          .recenthlyAddedCourses[index].populerCoursePrice,
                       style: TextStyle(
                         color: AppColor.textColorDark,
                         fontSize: 16,

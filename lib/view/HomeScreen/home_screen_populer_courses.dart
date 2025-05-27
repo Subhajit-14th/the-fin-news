@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:the_fin_news/utils/assets/app_colors.dart';
@@ -48,6 +49,13 @@ class HomeScreenPopulerCourses extends StatelessWidget {
                     homeProvider.populerCourses[index].populerImageUrl,
                     height: 200,
                     fit: BoxFit.fill,
+                    errorBuilder: (context, error, stackTrace) =>
+                        CachedNetworkImage(
+                      imageUrl:
+                          'https://dhanvan.in/public/images/upload/prod_default.png',
+                      height: 200,
+                      fit: BoxFit.fill,
+                    ),
                   ),
                 ),
                 SizedBox(height: height * 0.02),

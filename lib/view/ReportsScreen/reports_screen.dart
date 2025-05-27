@@ -1,11 +1,25 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:the_fin_news/utils/assets/app_colors.dart';
 import 'package:the_fin_news/view/ReportsScreen/reports_details_screen.dart';
 import 'package:the_fin_news/viewModel/reports_provider.dart';
 
-class ReportsScreen extends StatelessWidget {
+class ReportsScreen extends StatefulWidget {
   const ReportsScreen({super.key});
+
+  @override
+  State<ReportsScreen> createState() => _ReportsScreenState();
+}
+
+class _ReportsScreenState extends State<ReportsScreen> {
+  @override
+  void initState() {
+    super.initState();
+    if (!mounted) return;
+
+    context.read<ReportsProvider>().fetchReports();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -120,6 +134,13 @@ class ReportsScreen extends StatelessWidget {
                               .reportsImage,
                           height: 120,
                           fit: BoxFit.fill,
+                          errorBuilder: (context, error, stackTrace) =>
+                              CachedNetworkImage(
+                            imageUrl:
+                                'https://dhanvan.in/public/images/upload/prod_default.png',
+                            height: 200,
+                            fit: BoxFit.fill,
+                          ),
                         ),
                       ),
                     ),

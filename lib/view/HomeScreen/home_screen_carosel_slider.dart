@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -46,6 +47,14 @@ class HomeScreenCaroselSlider extends StatelessWidget {
                       Image.network(
                         item.image,
                         fit: BoxFit.fill,
+                        errorBuilder: (context, error, stackTrace) =>
+                            CachedNetworkImage(
+                          imageUrl:
+                              'https://dhanvan.in/public/images/upload/prod_default.png',
+                          height: 120,
+                          width: 120,
+                          fit: BoxFit.fill,
+                        ),
                       ),
                       Container(
                         height: 50,
