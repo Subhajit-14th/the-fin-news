@@ -27,6 +27,8 @@ dependencies:
   smooth_page_indicator: ^1.2.0+3
   cached_network_image: ^3.4.1
   flutter_html: ^3.0.0
+  chewie: ^1.11.3
+  video_player: ^2.9.5
 
 dependency_overrides:
   path: 1.9.1

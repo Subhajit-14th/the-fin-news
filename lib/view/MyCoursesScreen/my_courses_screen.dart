@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:provider/provider.dart';
 import 'package:the_fin_news/utils/assets/app_colors.dart';
 import 'package:the_fin_news/view/MyCoursesScreen/my_courses_details.dart';
@@ -100,14 +101,16 @@ class _MyCoursesScreenState extends State<MyCoursesScreen> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Text(
-                          '${item?.courseDescription}',
-                          style: TextStyle(
-                            color: AppColor.textColorDark,
-                            fontSize: 14,
-                            fontFamily: 'Lato',
-                            fontWeight: FontWeight.w500,
-                          ),
+                        Html(
+                          data: "${item?.courseDescription}",
+                          style: {
+                            "body": Style(
+                              color: AppColor.textColorDark,
+                              fontSize: FontSize(16),
+                              fontFamily: 'Lato',
+                              fontWeight: FontWeight.w400,
+                            ),
+                          },
                         ),
                         InkWell(
                           onTap: () {

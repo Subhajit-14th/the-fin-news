@@ -15,9 +15,12 @@ class _CoursesScreenState extends State<CoursesScreen> {
   @override
   void initState() {
     super.initState();
-    if (!mounted) return;
-
-    context.read<CourseProvider>().getAllCourses();
+    Future.microtask(
+      () {
+        if (!mounted) return;
+        context.read<CourseProvider>().getAllCourses();
+      },
+    );
   }
 
   @override
@@ -134,18 +137,18 @@ class _CoursesScreenState extends State<CoursesScreen> {
                       SizedBox(height: height * 0.01),
 
                       /// Course Price
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: Text(
-                          courseProvider.courses[index].populerCoursePrice,
-                          style: TextStyle(
-                            color: AppColor.textColorDark,
-                            fontSize: 16,
-                            fontFamily: 'Lato',
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.symmetric(horizontal: 10),
+                      //   child: Text(
+                      //     courseProvider.courses[index].populerCoursePrice,
+                      //     style: TextStyle(
+                      //       color: AppColor.textColorDark,
+                      //       fontSize: 16,
+                      //       fontFamily: 'Lato',
+                      //       fontWeight: FontWeight.w500,
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),

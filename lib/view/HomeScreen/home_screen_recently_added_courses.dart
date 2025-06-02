@@ -129,19 +129,19 @@ class HomeScreenRecentlyAddedCourses extends StatelessWidget {
                   SizedBox(height: height * 0.01),
 
                   /// Course Price
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Text(
-                      homeProvider
-                          .recenthlyAddedCourses[index].populerCoursePrice,
-                      style: TextStyle(
-                        color: AppColor.textColorDark,
-                        fontSize: 16,
-                        fontFamily: 'Lato',
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.symmetric(horizontal: 10),
+                  //   child: Text(
+                  //     homeProvider
+                  //         .recenthlyAddedCourses[index].populerCoursePrice,
+                  //     style: TextStyle(
+                  //       color: AppColor.textColorDark,
+                  //       fontSize: 16,
+                  //       fontFamily: 'Lato',
+                  //       fontWeight: FontWeight.w500,
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ),

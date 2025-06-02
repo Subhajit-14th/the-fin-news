@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:provider/provider.dart';
 import 'package:the_fin_news/utils/assets/app_colors.dart';
+import 'package:the_fin_news/view/MyCoursesScreen/video_player_screen.dart';
 import 'package:the_fin_news/viewModel/my_courses_provider.dart';
 
 class MyCoursesDetailsScreen extends StatefulWidget {
@@ -140,46 +141,94 @@ class _MyCoursesDetailsScreenState extends State<MyCoursesDetailsScreen> {
               ),
             ),
 
-            ListView.builder(
-              itemCount: courseProvider.courseDetailsApiResModel.videos?.length,
-              shrinkWrap: true,
-              padding: EdgeInsets.only(left: 16, right: 16, top: 16),
-              itemBuilder: (context, index) {
-                final item =
-                    courseProvider.courseDetailsApiResModel.videos?[index];
-                return Container(
-                  margin: EdgeInsets.only(bottom: 16),
-                  padding: EdgeInsets.all(14),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(14),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withAlpha(50),
-                        blurRadius: 10,
-                        spreadRadius: 1,
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 16),
-                        child: Text(
-                          '${item?.chapter}',
-                          style: TextStyle(
-                            color: AppColor.textColorDark,
-                            fontSize: 14,
-                            fontFamily: 'Lato',
-                            fontWeight: FontWeight.bold,
+            Expanded(
+              child: ListView.builder(
+                itemCount:
+                    courseProvider.courseDetailsApiResModel.videos?.length,
+                shrinkWrap: true,
+                padding: EdgeInsets.only(left: 16, right: 16, top: 16),
+                physics: const BouncingScrollPhysics(),
+                itemBuilder: (context, index) {
+                  final item =
+                      courseProvider.courseDetailsApiResModel.videos?[index];
+                  return Container(
+                    margin: EdgeInsets.only(bottom: 16),
+                    padding: EdgeInsets.all(14),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(14),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withAlpha(50),
+                          blurRadius: 10,
+                          spreadRadius: 1,
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Flexible(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(14),
+                            child: Image.network(
+                              'https://dhanvan.in/public/images/upload/prod_default.png',
+                              height: 100,
+                              fit: BoxFit.fill,
+                              errorBuilder: (context, error, stackTrace) =>
+                                  CachedNetworkImage(
+                                imageUrl:
+                                    'https://dhanvan.in/public/images/upload/prod_default.png',
+                                // height: 200,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                );
-              },
+                        Flexible(
+                          flex: 2,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 16),
+                                child: Text(
+                                  '${item?.chapter}',
+                                  style: TextStyle(
+                                    color: AppColor.textColorDark,
+                                    fontSize: 14,
+                                    fontFamily: 'Lato',
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              ElevatedButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              VideoPlayerScreen()));
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: AppColor.primaryColor,
+                                ),
+                                child: Text(
+                                  '▷ Play Now',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
             ),
           ],
         );
