@@ -40,94 +40,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 HomeScreenCaroselSlider(),
                 SizedBox(height: height * 0.02),
 
-                /// Populer course heading
-                Padding(
-                  padding: const EdgeInsets.only(left: 16, right: 16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Populer Courses',
-                        style: TextStyle(
-                          color: AppColor.textColorDark,
-                          fontSize: 18,
-                          fontFamily: 'Raleway',
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            'See All',
-                            style: TextStyle(
-                              color: AppColor.primaryColor,
-                              fontSize: 18,
-                              fontFamily: 'Raleway',
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Icon(
-                            Icons.arrow_forward_rounded,
-                            color: AppColor.primaryColor,
-                            size: 18,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-
-                /// Populer Course
-                HomeScreenPopulerCourses(),
-                SizedBox(height: height * 0.02),
-
-                /// Recently Added Courses heading
-                Padding(
-                  padding: const EdgeInsets.only(left: 16, right: 16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Recently Added Courses',
-                        style: TextStyle(
-                          color: AppColor.textColorDark,
-                          fontSize: 18,
-                          fontFamily: 'Raleway',
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            'See All',
-                            style: TextStyle(
-                              color: AppColor.primaryColor,
-                              fontSize: 18,
-                              fontFamily: 'Raleway',
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Icon(
-                            Icons.arrow_forward_rounded,
-                            color: AppColor.primaryColor,
-                            size: 18,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: height * 0.02),
-
-                /// Recently Added Courses
-                for (var i = 0;
-                    i < homeProvider.recenthlyAddedCourses.length && i < 3;
-                    i++) ...[
-                  HomeScreenRecentlyAddedCourses(
-                    index: i,
-                  ),
-                ],
-
                 /// Live News heading
                 Padding(
                   padding: const EdgeInsets.only(left: 16, right: 16),
@@ -241,6 +153,94 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 HomeScreenMarketData(),
+
+                /// Populer course heading
+                Padding(
+                  padding: const EdgeInsets.only(left: 16, right: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Populer Courses',
+                        style: TextStyle(
+                          color: AppColor.textColorDark,
+                          fontSize: 18,
+                          fontFamily: 'Raleway',
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            'See All',
+                            style: TextStyle(
+                              color: AppColor.primaryColor,
+                              fontSize: 18,
+                              fontFamily: 'Raleway',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_rounded,
+                            color: AppColor.primaryColor,
+                            size: 18,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+
+                /// Populer Course
+                HomeScreenPopulerCourses(),
+                SizedBox(height: height * 0.02),
+
+                /// Recently Added Courses heading
+                Padding(
+                  padding: const EdgeInsets.only(left: 16, right: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Recently Added Courses',
+                        style: TextStyle(
+                          color: AppColor.textColorDark,
+                          fontSize: 18,
+                          fontFamily: 'Raleway',
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            'See All',
+                            style: TextStyle(
+                              color: AppColor.primaryColor,
+                              fontSize: 18,
+                              fontFamily: 'Raleway',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_rounded,
+                            color: AppColor.primaryColor,
+                            size: 18,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: height * 0.02),
+
+                /// Recently Added Courses
+                for (var i = 0;
+                    i < homeProvider.recenthlyAddedCourses.length && i < 3;
+                    i++) ...[
+                  HomeScreenRecentlyAddedCourses(
+                    index: i,
+                  ),
+                ],
 
                 /// Contact With Us
                 Padding(

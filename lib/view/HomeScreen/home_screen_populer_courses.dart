@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:the_fin_news/utils/assets/app_colors.dart';
 import 'package:the_fin_news/utils/widgets/common_button.dart';
+import 'package:the_fin_news/viewModel/auth_services_provider.dart';
 import 'package:the_fin_news/viewModel/home_provider.dart';
 
 class HomeScreenPopulerCourses extends StatelessWidget {
@@ -97,7 +98,41 @@ class HomeScreenPopulerCourses extends StatelessWidget {
                     width: double.infinity,
                     buttonText: 'Get this course',
                     buttonColor: AppColor.secondaryColor,
-                    onTap: () {},
+                    onTap: context.read<AuthServices>().isLoginDone
+                        ? () {}
+                        : () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Please login to your account to get this course',
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                backgroundColor: AppColor.secondaryColor,
+                                duration: const Duration(seconds: 3),
+                                behavior: SnackBarBehavior.floating,
+                                margin: const EdgeInsets.only(
+                                  bottom: 50,
+                                  left: 20,
+                                  right: 20,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                elevation: 10,
+                                action: SnackBarAction(
+                                  label: 'Close',
+                                  textColor: Colors.white,
+                                  onPressed: () {
+                                    ScaffoldMessenger.of(context)
+                                        .hideCurrentSnackBar();
+                                  },
+                                ),
+                              ),
+                            );
+                          },
                   ),
                 ),
               ],
