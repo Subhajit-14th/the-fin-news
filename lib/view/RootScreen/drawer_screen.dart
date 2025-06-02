@@ -4,6 +4,7 @@ import 'package:the_fin_news/services/hive_database.dart';
 import 'package:the_fin_news/utils/assets/app_colors.dart';
 import 'package:the_fin_news/view/LoginScreen/login_screen.dart';
 import 'package:the_fin_news/view/MyCoursesScreen/my_courses_screen.dart';
+import 'package:the_fin_news/view/ProfileScreen/profile_screen.dart';
 import 'package:the_fin_news/viewModel/auth_services_provider.dart';
 import 'package:the_fin_news/viewModel/screen_route_provider.dart';
 
@@ -83,9 +84,14 @@ class DrawerScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Icon(
-                    Icons.exit_to_app_rounded,
-                    color: Colors.red,
+                  InkWell(
+                    onTap: () {
+                      authServices.logOut();
+                    },
+                    child: Icon(
+                      Icons.exit_to_app_rounded,
+                      color: Colors.red,
+                    ),
                   ),
                 ],
               ),
@@ -175,7 +181,12 @@ class DrawerScreen extends StatelessWidget {
                         fontFamily: 'Raleway',
                       ),
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProfileScreen()));
+                    },
                   ),
                 ],
               );

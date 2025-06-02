@@ -18,33 +18,33 @@ class CommonTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      cursorColor: AppColor.textColorLight,
+      cursorColor: AppColor.textColorDark,
       readOnly: onTap == null ? false : true,
       style: const TextStyle(
-        color: AppColor.textColorLight,
+        color: AppColor.textColorDark,
       ),
       onTap: onTap,
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: const TextStyle(
-          color: AppColor.textColorLight,
+          color: AppColor.textColorDark,
         ),
         labelText: labelText,
         labelStyle: const TextStyle(
-          color: AppColor.textColorLight,
+          color: AppColor.textColorDark,
         ),
         floatingLabelBehavior: FloatingLabelBehavior.never,
-        focusColor: AppColor.textColorLight,
+        focusColor: AppColor.textColorDark,
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: const BorderSide(
-            color: AppColor.textColorLight,
+            color: AppColor.textColorDark,
           ),
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: const BorderSide(
-            color: AppColor.textColorLight,
+            color: AppColor.textColorDark,
           ),
         ),
       ),
