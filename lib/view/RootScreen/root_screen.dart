@@ -99,46 +99,33 @@ class RootScreen extends StatelessWidget {
   }) {
     return Consumer<ScreenRouteProvider>(builder: (context, provider, child) {
       bool isSelected = provider.currentCount == index;
-      return TweenAnimationBuilder<double>(
-          duration: Duration(milliseconds: 300),
-          curve: Curves.linear,
-          tween: Tween<double>(
-              begin: isSelected ? 1.0 : 0.0, end: isSelected ? 1.0 : 0.0),
-          builder: (context, value, child) {
-            return Transform.translate(
-              offset: Offset(0, -value * 10),
-              child: InkWell(
-                onTap: () {
-                  provider.setScreenRoute(index);
-                },
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    ImageIcon(
-                      AssetImage(
-                        image,
-                      ),
-                      color: isSelected
-                          ? AppColor.primaryColor
-                          : AppColor.textColorDark,
-                    ),
-                    Text(
-                      newsName,
-                      style: TextStyle(
-                        color: isSelected
-                            ? AppColor.primaryColor
-                            : AppColor.textColorDark,
-                        fontSize: 14,
-                        fontFamily: 'Raleway',
-                        fontWeight:
-                            isSelected ? FontWeight.bold : FontWeight.normal,
-                      ),
-                    ),
-                  ],
-                ),
+      return InkWell(
+        onTap: () {
+          provider.setScreenRoute(index);
+        },
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ImageIcon(
+              AssetImage(
+                image,
               ),
-            );
-          });
+              color:
+                  isSelected ? AppColor.primaryColor : AppColor.textColorDark,
+            ),
+            Text(
+              newsName,
+              style: TextStyle(
+                color:
+                    isSelected ? AppColor.primaryColor : AppColor.textColorDark,
+                fontSize: 14,
+                fontFamily: 'Raleway',
+                fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+              ),
+            ),
+          ],
+        ),
+      );
     });
   }
 }

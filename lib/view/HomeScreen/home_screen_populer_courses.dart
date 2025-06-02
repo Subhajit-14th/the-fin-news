@@ -14,7 +14,7 @@ class HomeScreenPopulerCourses extends StatelessWidget {
     final homeProvider = Provider.of<HomeProvider>(context);
     final height = MediaQuery.of(context).size.height;
     return SizedBox(
-      height: 400,
+      height: 350,
       child: ListView.builder(
         itemCount: homeProvider.populerCourses.length,
         scrollDirection: Axis.horizontal,
@@ -77,19 +77,19 @@ class HomeScreenPopulerCourses extends StatelessWidget {
                 SizedBox(height: height * 0.01),
 
                 /// Course Price
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Text(
-                    homeProvider.populerCourses[index].populerCoursePrice,
-                    style: TextStyle(
-                      color: AppColor.textColorDark,
-                      fontSize: 20,
-                      fontFamily: 'Lato',
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-                SizedBox(height: height * 0.02),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 10),
+                //   child: Text(
+                //     homeProvider.populerCourses[index].populerCoursePrice,
+                //     style: TextStyle(
+                //       color: AppColor.textColorDark,
+                //       fontSize: 20,
+                //       fontFamily: 'Lato',
+                //       fontWeight: FontWeight.w500,
+                //     ),
+                //   ),
+                // ),
+                // SizedBox(height: height * 0.02),
 
                 /// get this course button
                 Padding(

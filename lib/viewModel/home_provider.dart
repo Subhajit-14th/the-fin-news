@@ -54,6 +54,10 @@ class HomeProvider extends ChangeNotifier {
   void getHomeData() async {
     _isHomeDataLoading = true;
     notifyListeners();
+
+    print('==================== This is my function =================');
+    print(
+        '==================== This is my data $_isHomeDataLoading =================');
     homeApiResModel = await _homeController.fetchHomeData();
     if (homeApiResModel.status == 200) {
       debugPrint("Home data fetched successfully: ${homeApiResModel.message}");
@@ -92,8 +96,12 @@ class HomeProvider extends ChangeNotifier {
         },
       );
       _isHomeDataLoading = false;
+      print(
+          '==================== This is my success data $_isHomeDataLoading =================');
       notifyListeners();
     } else {
+      print(
+          '==================== This is my error data $_isHomeDataLoading =================');
       debugPrint("Failed to fetch home data: ${homeApiResModel.message}");
       _isHomeDataLoading = false;
     }

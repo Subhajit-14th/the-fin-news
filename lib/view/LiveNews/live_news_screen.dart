@@ -14,10 +14,13 @@ class _LiveNewsScreenState extends State<LiveNewsScreen> {
   @override
   void initState() {
     super.initState();
-    if (!mounted) return;
-
-    context.read<LiveNewsProvider>().fetchLiveNewsCategory();
-    context.read<LiveNewsProvider>().fetchLiveNewsData();
+    Future.microtask(
+      () {
+        if (!mounted) return;
+        context.read<LiveNewsProvider>().fetchLiveNewsCategory();
+        context.read<LiveNewsProvider>().fetchLiveNewsData();
+      },
+    );
   }
 
   @override
