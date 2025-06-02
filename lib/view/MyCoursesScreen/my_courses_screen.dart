@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:the_fin_news/utils/assets/app_colors.dart';
+import 'package:the_fin_news/view/MyCoursesScreen/my_courses_details.dart';
 import 'package:the_fin_news/viewModel/my_courses_provider.dart';
 
 class MyCoursesScreen extends StatefulWidget {
@@ -109,7 +110,18 @@ class _MyCoursesScreenState extends State<MyCoursesScreen> {
                           ),
                         ),
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => MyCoursesDetailsScreen(
+                                  courseId: "${item?.courseId}",
+                                  courseImage:
+                                      "https://smartstylin.in/fin/admin/${item?.coursePhoto}",
+                                ),
+                              ),
+                            );
+                          },
                           child: Text(
                             'View Details',
                             style: TextStyle(
