@@ -18,7 +18,6 @@ class _HomeScreenLiveNewsState extends State<HomeScreenLiveNews> {
       () {
         if (!mounted) return;
         context.read<LiveNewsProvider>().fetchLiveNewsCategory();
-        context.read<LiveNewsProvider>().fetchLiveNewsData();
       },
     );
   }

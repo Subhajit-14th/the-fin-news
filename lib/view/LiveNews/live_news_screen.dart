@@ -18,7 +18,6 @@ class _LiveNewsScreenState extends State<LiveNewsScreen> {
       () {
         if (!mounted) return;
         context.read<LiveNewsProvider>().fetchLiveNewsCategory();
-        context.read<LiveNewsProvider>().fetchLiveNewsData();
       },
     );
   }
@@ -82,83 +81,91 @@ class _LiveNewsScreenState extends State<LiveNewsScreen> {
           ),
 
           /// Live News Items
-          Expanded(
-            child: ListView.builder(
-              itemCount: liveNewsProvider.liveNewsItems.length,
-              shrinkWrap: true,
-              physics: const BouncingScrollPhysics(),
-              padding: EdgeInsets.only(left: 16, right: 16, top: 16),
-              itemBuilder: (context, index) {
-                return Container(
-                  margin: EdgeInsets.only(bottom: 16),
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: AppColor.tertiaryColor,
-                    borderRadius: BorderRadius.circular(14),
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppColor.textColorDark.withAlpha(50),
-                        blurRadius: 10,
-                        spreadRadius: 1,
-                      ),
-                    ],
+          liveNewsProvider.liveNewsItems.isEmpty
+              ? Center(
+                  child: Text(
+                    'No data found',
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      /// News Title
-                      Text(
-                        liveNewsProvider.liveNewsItems[index].liveNewsTitle,
-                        style: TextStyle(
-                          color: AppColor.textColorDark,
-                          fontSize: 16,
-                          fontFamily: 'Lato',
-                          fontWeight: FontWeight.bold,
+                )
+              : Expanded(
+                  child: ListView.builder(
+                    itemCount: liveNewsProvider.liveNewsItems.length,
+                    shrinkWrap: true,
+                    physics: const BouncingScrollPhysics(),
+                    padding: EdgeInsets.only(left: 16, right: 16, top: 16),
+                    itemBuilder: (context, index) {
+                      return Container(
+                        margin: EdgeInsets.only(bottom: 16),
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: AppColor.tertiaryColor,
+                          borderRadius: BorderRadius.circular(14),
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColor.textColorDark.withAlpha(50),
+                              blurRadius: 10,
+                              spreadRadius: 1,
+                            ),
+                          ],
                         ),
-                      ),
-                      SizedBox(height: 10),
-
-                      /// News Time, category and share button
-                      Row(
-                        children: [
-                          Text(
-                            liveNewsProvider.liveNewsItems[index].liveNewsTime,
-                            style: TextStyle(
-                              color: AppColor.textColorDark,
-                              fontSize: 14,
-                              fontFamily: 'Lato',
-                            ),
-                          ),
-                          SizedBox(width: 16),
-                          Container(
-                            padding: EdgeInsets.all(4),
-                            decoration: BoxDecoration(
-                              color: Colors.grey[300],
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Text(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            /// News Title
+                            Text(
                               liveNewsProvider
-                                  .liveNewsItems[index].liveNewsCategory,
+                                  .liveNewsItems[index].liveNewsTitle,
                               style: TextStyle(
                                 color: AppColor.textColorDark,
+                                fontSize: 16,
                                 fontFamily: 'Lato',
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                          ),
-                          Spacer(),
-                          Icon(
-                            Icons.share_rounded,
-                            color: AppColor.primaryColor,
-                            size: 18,
-                          ),
-                        ],
-                      ),
-                    ],
+                            SizedBox(height: 10),
+
+                            /// News Time, category and share button
+                            Row(
+                              children: [
+                                Text(
+                                  liveNewsProvider
+                                      .liveNewsItems[index].liveNewsTime,
+                                  style: TextStyle(
+                                    color: AppColor.textColorDark,
+                                    fontSize: 14,
+                                    fontFamily: 'Lato',
+                                  ),
+                                ),
+                                SizedBox(width: 16),
+                                Container(
+                                  padding: EdgeInsets.all(4),
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey[300],
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Text(
+                                    liveNewsProvider
+                                        .liveNewsItems[index].liveNewsCategory,
+                                    style: TextStyle(
+                                      color: AppColor.textColorDark,
+                                      fontFamily: 'Lato',
+                                    ),
+                                  ),
+                                ),
+                                Spacer(),
+                                Icon(
+                                  Icons.share_rounded,
+                                  color: AppColor.primaryColor,
+                                  size: 18,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
-          ),
+                ),
         ],
       );
     });

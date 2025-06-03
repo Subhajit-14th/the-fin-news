@@ -76,6 +76,7 @@ class PopularCourses {
   String? id;
   String? courseCategory;
   String? courseTitle;
+  String? courseDescription;
   String? courseRegularPrice;
   String? courseDiscountPrice;
   String? coursePhoto;
@@ -84,6 +85,7 @@ class PopularCourses {
       {this.id,
       this.courseCategory,
       this.courseTitle,
+      this.courseDescription,
       this.courseRegularPrice,
       this.courseDiscountPrice,
       this.coursePhoto});
@@ -92,6 +94,7 @@ class PopularCourses {
     id = json['id'];
     courseCategory = json['course_category'];
     courseTitle = json['course_title'];
+    courseDescription = json['course_description'];
     courseRegularPrice = json['course_regular_price'];
     courseDiscountPrice = json['course_discount_price'];
     coursePhoto = json['course_photo'];
@@ -102,6 +105,7 @@ class PopularCourses {
     data['id'] = id;
     data['course_category'] = courseCategory;
     data['course_title'] = courseTitle;
+    data['course_description'] = courseDescription;
     data['course_regular_price'] = courseRegularPrice;
     data['course_discount_price'] = courseDiscountPrice;
     data['course_photo'] = coursePhoto;
@@ -113,6 +117,7 @@ class RecentlyCourses {
   String? id;
   String? courseCategory;
   String? courseTitle;
+  String? courseDescription;
   String? courseRegularPrice;
   String? courseDiscountPrice;
   String? coursePhoto;
@@ -121,6 +126,7 @@ class RecentlyCourses {
       {this.id,
       this.courseCategory,
       this.courseTitle,
+      this.courseDescription,
       this.courseRegularPrice,
       this.courseDiscountPrice,
       this.coursePhoto});
@@ -129,6 +135,7 @@ class RecentlyCourses {
     id = json['id'];
     courseCategory = json['course_category'];
     courseTitle = json['course_title'];
+    courseDescription = json['course_description'];
     courseRegularPrice = json['course_regular_price'];
     courseDiscountPrice = json['course_discount_price'];
     coursePhoto = json['course_photo'];
@@ -139,6 +146,7 @@ class RecentlyCourses {
     data['id'] = id;
     data['course_category'] = courseCategory;
     data['course_title'] = courseTitle;
+    data['course_description'] = courseDescription;
     data['course_regular_price'] = courseRegularPrice;
     data['course_discount_price'] = courseDiscountPrice;
     data['course_photo'] = coursePhoto;

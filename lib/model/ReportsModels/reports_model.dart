@@ -3,11 +3,13 @@ class ReportsModel {
   String reprtsTitle;
   String reportsDuration;
   String reportsDescription;
+  String reportsCategory;
 
   ReportsModel({
     required this.reportsImage,
     required this.reprtsTitle,
     required this.reportsDuration,
     required this.reportsDescription,
+    required this.reportsCategory,
   });
 }

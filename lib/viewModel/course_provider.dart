@@ -26,7 +26,9 @@ class CourseProvider extends ChangeNotifier {
           _courses.add(PopulerCourseItem(
             populerImageUrl: element.coursePhoto ?? "",
             populerCourseTitle: element.courseTitle ?? "",
+            populerCourseDescription: "",
             populerCoursePrice: element.courseDiscountPrice ?? "",
+            populerCourseCategory: element.courseCategory ?? "",
           ));
         },
       );
