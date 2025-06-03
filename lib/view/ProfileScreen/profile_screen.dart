@@ -15,6 +15,20 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
+  void initState() {
+    super.initState();
+    Future.microtask(
+      () {
+        if (!mounted) return;
+        context.read<AuthServices>().updateEmailController.text =
+            "${HiveDatabase.getUserEmail()}";
+        context.read<AuthServices>().updateNameController.text =
+            "${HiveDatabase.getUserName()}";
+      },
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,

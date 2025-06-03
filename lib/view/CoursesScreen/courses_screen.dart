@@ -92,24 +92,8 @@ class _CoursesScreenState extends State<CoursesScreen> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Text(
-                              'Videos',
-                              style: TextStyle(
-                                color: AppColor.textColorDark,
-                                fontSize: 12,
-                                fontFamily: 'Lato',
-                              ),
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 4, vertical: 2),
-                            margin: EdgeInsets.only(left: 10),
-                            decoration: BoxDecoration(
-                              color: Colors.grey[300],
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Text(
-                              'Files',
+                              courseProvider
+                                  .courses[index].populerCourseCategory,
                               style: TextStyle(
                                 color: AppColor.textColorDark,
                                 fontSize: 12,
