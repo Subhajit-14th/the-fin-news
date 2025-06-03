@@ -6,7 +6,7 @@ import 'package:the_fin_news/model/LiveNews/live_news_social_items.dart';
 import 'package:the_fin_news/model/LiveNews/populer_course_item.dart';
 
 class HomeProvider extends ChangeNotifier {
-  List<HomeScreenCaroselSliderModel> _homeCarouselImageUrls = [];
+  final List<HomeScreenCaroselSliderModel> _homeCarouselImageUrls = [];
   List<HomeScreenCaroselSliderModel> get homeCarouselImageUrls =>
       _homeCarouselImageUrls;
 
@@ -54,10 +54,6 @@ class HomeProvider extends ChangeNotifier {
   void getHomeData() async {
     _isHomeDataLoading = true;
     notifyListeners();
-
-    print('==================== This is my function =================');
-    print(
-        '==================== This is my data $_isHomeDataLoading =================');
     homeApiResModel = await _homeController.fetchHomeData();
     if (homeApiResModel.status == 200) {
       debugPrint("Home data fetched successfully: ${homeApiResModel.message}");
@@ -80,9 +76,12 @@ class HomeProvider extends ChangeNotifier {
         (element) {
           debugPrint("Popular Course ID: ${element.id}, Title: ");
           _populerCourses.add(PopulerCourseItem(
-              populerImageUrl: element.coursePhoto ?? '',
-              populerCourseTitle: element.courseTitle ?? '',
-              populerCoursePrice: element.courseRegularPrice ?? ''));
+            populerImageUrl: element.coursePhoto ?? '',
+            populerCourseTitle: element.courseTitle ?? '',
+            populerCourseDescription: element.courseDescription ?? '',
+            populerCoursePrice: element.courseRegularPrice ?? '',
+            populerCourseCategory: element.courseCategory ?? '',
+          ));
         },
       );
 
@@ -90,18 +89,17 @@ class HomeProvider extends ChangeNotifier {
         (element) {
           debugPrint("Popular Course ID: ${element.id}, Title: ");
           _recenthlyAddedCourses.add(PopulerCourseItem(
-              populerImageUrl: element.coursePhoto ?? '',
-              populerCourseTitle: element.courseTitle ?? '',
-              populerCoursePrice: element.courseRegularPrice ?? ''));
+            populerImageUrl: element.coursePhoto ?? '',
+            populerCourseTitle: element.courseTitle ?? '',
+            populerCourseDescription: element.courseDescription ?? '',
+            populerCoursePrice: element.courseRegularPrice ?? '',
+            populerCourseCategory: element.courseCategory ?? '',
+          ));
         },
       );
       _isHomeDataLoading = false;
-      print(
-          '==================== This is my success data $_isHomeDataLoading =================');
       notifyListeners();
     } else {
-      print(
-          '==================== This is my error data $_isHomeDataLoading =================');
       debugPrint("Failed to fetch home data: ${homeApiResModel.message}");
       _isHomeDataLoading = false;
     }

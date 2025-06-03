@@ -17,7 +17,7 @@ class _HomeScreenReportsState extends State<HomeScreenReports> {
     super.initState();
     if (!mounted) return;
 
-    context.read<ReportsProvider>().fetchReports();
+    context.read<ReportsProvider>().fetchReports("", "");
   }
 
   @override

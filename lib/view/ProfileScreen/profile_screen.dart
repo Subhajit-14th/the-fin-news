@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:the_fin_news/services/hive_database.dart';
 import 'package:the_fin_news/utils/assets/app_colors.dart';
 import 'package:the_fin_news/utils/widgets/common_button.dart';
 import 'package:the_fin_news/utils/widgets/common_text_field.dart';
+import 'package:the_fin_news/viewModel/auth_services_provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -44,20 +46,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
             CommonTextField(
               labelText: '${HiveDatabase.getUserName()}',
               hintText: "${HiveDatabase.getUserName()}",
-              controller: TextEditingController(),
+              controller: context.read<AuthServices>().updateNameController,
             ),
             SizedBox(height: 16),
             CommonTextField(
               labelText: '${HiveDatabase.getUserEmail()}',
               hintText: "${HiveDatabase.getUserEmail()}",
-              controller: TextEditingController(),
+              controller: context.read<AuthServices>().updateEmailController,
             ),
             SizedBox(height: 20),
-            CommonButton(
-              width: double.infinity,
-              buttonText: 'Update Profile',
-              buttonColor: AppColor.primaryColor,
-            ),
+            Consumer<AuthServices>(builder: (context, authServices, child) {
+              if (authServices.isUserUpdating) {
+                return Center(
+                  child: CircularProgressIndicator(
+                    color: AppColor.primaryColor,
+                  ),
+                );
+              }
+              return CommonButton(
+                width: double.infinity,
+                buttonText: 'Update Profile',
+                buttonColor: AppColor.primaryColor,
+                onTap: () {
+                  authServices.updateProfile(context);
+                },
+              );
+            }),
           ],
         ),
       ),

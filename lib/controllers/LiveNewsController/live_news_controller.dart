@@ -6,13 +6,20 @@ import 'package:http/http.dart' as http;
 import 'package:the_fin_news/model/LiveNews/live_news_category_api_res_model.dart';
 
 class LiveNewsController {
-  Future<LiveNewsDataApiResModel> getLiveNewsData() async {
+  Future<LiveNewsDataApiResModel> getLiveNewsData(
+      {required String liveNewsCategoryId,
+      required String liveNewsCateName}) async {
     LiveNewsDataApiResModel liveNewsDataApiResModel = LiveNewsDataApiResModel();
     try {
+      // var request = http.Request(
+      //     'GET',
+      //     Uri.parse(
+      //         'https://smartstylin.in/fin/admin/livenews-type-list-api.php'));
+
       var request = http.Request(
           'GET',
           Uri.parse(
-              'https://smartstylin.in/fin/admin/livenews-type-list-api.php'));
+              'https://smartstylin.in/fin/admin/livenews-type-list-api.php?livenews_category_id=$liveNewsCategoryId&livenews_cate_name=$liveNewsCateName'));
 
       http.StreamedResponse response = await request.send();
 

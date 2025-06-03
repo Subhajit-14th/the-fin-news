@@ -72,43 +72,22 @@ class HomeScreenRecentlyAddedCourses extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-                        margin: EdgeInsets.only(left: 10),
-                        decoration: BoxDecoration(
-                          color: Colors.grey[300],
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Text(
-                          'Videos',
-                          style: TextStyle(
-                            color: AppColor.textColorDark,
-                            fontSize: 12,
-                            fontFamily: 'Lato',
-                          ),
-                        ),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                    margin: EdgeInsets.only(left: 10),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Text(
+                      homeProvider
+                          .recenthlyAddedCourses[index].populerCourseCategory,
+                      style: TextStyle(
+                        color: AppColor.textColorDark,
+                        fontSize: 12,
+                        fontFamily: 'Lato',
                       ),
-                      Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-                        margin: EdgeInsets.only(left: 10),
-                        decoration: BoxDecoration(
-                          color: Colors.grey[300],
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Text(
-                          'Files',
-                          style: TextStyle(
-                            color: AppColor.textColorDark,
-                            fontSize: 12,
-                            fontFamily: 'Lato',
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                   SizedBox(height: height * 0.01),
 
@@ -129,19 +108,20 @@ class HomeScreenRecentlyAddedCourses extends StatelessWidget {
                   SizedBox(height: height * 0.01),
 
                   /// Course Price
-                  // Padding(
-                  //   padding: const EdgeInsets.symmetric(horizontal: 10),
-                  //   child: Text(
-                  //     homeProvider
-                  //         .recenthlyAddedCourses[index].populerCoursePrice,
-                  //     style: TextStyle(
-                  //       color: AppColor.textColorDark,
-                  //       fontSize: 16,
-                  //       fontFamily: 'Lato',
-                  //       fontWeight: FontWeight.w500,
-                  //     ),
-                  //   ),
-                  // ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Text(
+                      homeProvider.recenthlyAddedCourses[index]
+                          .populerCourseDescription,
+                      maxLines: 2,
+                      style: TextStyle(
+                        color: AppColor.textColorDark,
+                        fontSize: 16,
+                        fontFamily: 'Lato',
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

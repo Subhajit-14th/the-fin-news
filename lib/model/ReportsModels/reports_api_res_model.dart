@@ -33,13 +33,15 @@ class Record {
   String? reportTitle;
   String? reportDescription;
   String? reportImage;
+  String? postedTimeAgo;
 
   Record(
       {this.id,
       this.reportCategory,
       this.reportTitle,
       this.reportDescription,
-      this.reportImage});
+      this.reportImage,
+      this.postedTimeAgo});
 
   Record.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -47,6 +49,7 @@ class Record {
     reportTitle = json['report_title'];
     reportDescription = json['report_description'];
     reportImage = json['report_image'];
+    postedTimeAgo = json['posted_time_ago'];
   }
 
   Map<String, dynamic> toJson() {
@@ -56,6 +59,7 @@ class Record {
     data['report_title'] = reportTitle;
     data['report_description'] = reportDescription;
     data['report_image'] = reportImage;
+    data['posted_time_ago'] = postedTimeAgo;
     return data;
   }
 }
