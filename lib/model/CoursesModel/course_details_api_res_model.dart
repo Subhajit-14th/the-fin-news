@@ -1,12 +1,13 @@
-class CourseDetailsApiResModel {
+class NormalCourseDetailsApiResModel {
   String? msg;
   int? status;
   Course? course;
   List<Videos>? videos;
 
-  CourseDetailsApiResModel({this.msg, this.status, this.course, this.videos});
+  NormalCourseDetailsApiResModel(
+      {this.msg, this.status, this.course, this.videos});
 
-  CourseDetailsApiResModel.fromJson(Map<String, dynamic> json) {
+  NormalCourseDetailsApiResModel.fromJson(Map<String, dynamic> json) {
     msg = json['msg'];
     status = json['status'];
     course = json['course'] != null ? Course.fromJson(json['course']) : null;
@@ -37,24 +38,21 @@ class Course {
   String? courseCategory;
   String? courseTitle;
   String? courseDescription;
-  int? courseRegularPrice;
-  int? courseDiscountPrice;
+  String? coursePhoto;
 
   Course(
       {this.id,
       this.courseCategory,
       this.courseTitle,
       this.courseDescription,
-      this.courseRegularPrice,
-      this.courseDiscountPrice});
+      this.coursePhoto});
 
   Course.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     courseCategory = json['course_category'];
     courseTitle = json['course_title'];
     courseDescription = json['course_description'];
-    courseRegularPrice = json['course_regular_price'];
-    courseDiscountPrice = json['course_discount_price'];
+    coursePhoto = json['course_photo'];
   }
 
   Map<String, dynamic> toJson() {
@@ -63,29 +61,25 @@ class Course {
     data['course_category'] = courseCategory;
     data['course_title'] = courseTitle;
     data['course_description'] = courseDescription;
-    data['course_regular_price'] = courseRegularPrice;
-    data['course_discount_price'] = courseDiscountPrice;
+    data['course_photo'] = coursePhoto;
     return data;
   }
 }
 
 class Videos {
   String? chapter;
-  String? videoPath;
   String? videoUrl;
 
-  Videos({this.chapter, this.videoPath, this.videoUrl});
+  Videos({this.chapter, this.videoUrl});
 
   Videos.fromJson(Map<String, dynamic> json) {
     chapter = json['chapter'];
-    videoPath = json['video_path'];
     videoUrl = json['video_url'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['chapter'] = chapter;
-    data['video_path'] = videoPath;
     data['video_url'] = videoUrl;
     return data;
   }

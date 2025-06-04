@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:provider/provider.dart';
 import 'package:the_fin_news/utils/assets/app_colors.dart';
 import 'package:the_fin_news/view/MyCoursesScreen/video_player_screen.dart';
@@ -24,7 +23,7 @@ class _MyCoursesDetailsScreenState extends State<MyCoursesDetailsScreen> {
     Future.microtask(
       () {
         if (!mounted) return;
-        context.read<MyCoursesProvider>().fetchCourseDetails(widget.courseId);
+        context.read<MyCoursesProvider>().fetchMyCourseDetails(widget.courseId);
       },
     );
   }
@@ -76,30 +75,31 @@ class _MyCoursesDetailsScreenState extends State<MyCoursesDetailsScreen> {
                 ),
               ),
             ),
+            SizedBox(height: 16),
 
             /// Course Category
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Colors.grey.withAlpha(70),
-                borderRadius: BorderRadius.circular(14),
-              ),
-              child: Text(
-                '${courseProvider.courseDetailsApiResModel.course?.courseCategory}',
-                style: TextStyle(
-                  color: AppColor.textColorDark,
-                  fontSize: 14,
-                  fontFamily: 'Lato',
-                ),
-              ),
-            ),
+            // Container(
+            //   margin: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            //   padding: EdgeInsets.all(10),
+            //   decoration: BoxDecoration(
+            //     color: Colors.grey.withAlpha(70),
+            //     borderRadius: BorderRadius.circular(14),
+            //   ),
+            //   child: Text(
+            //     '${courseProvider.courseDetailsApiResModel.course?.courseCategory}',
+            //     style: TextStyle(
+            //       color: AppColor.textColorDark,
+            //       fontSize: 14,
+            //       fontFamily: 'Lato',
+            //     ),
+            //   ),
+            // ),
 
             /// Course Title
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 18),
               child: Text(
-                '${courseProvider.courseDetailsApiResModel.course?.courseTitle}',
+                '${courseProvider.courseDetailsApiResModel.record?.courseTitle}',
                 style: TextStyle(
                   color: AppColor.textColorDark,
                   fontSize: 16,
@@ -108,24 +108,22 @@ class _MyCoursesDetailsScreenState extends State<MyCoursesDetailsScreen> {
                 ),
               ),
             ),
+            SizedBox(height: 10),
 
             /// Course Description
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 18),
-              child: Html(
-                data: courseProvider
-                        .courseDetailsApiResModel.course?.courseDescription ??
-                    "",
-                style: {
-                  "body": Style(
-                    color: AppColor.textColorDark,
-                    fontSize: FontSize(16),
-                    fontFamily: 'Lato',
-                    fontWeight: FontWeight.w300,
-                  ),
-                },
+              child: Text(
+                '${courseProvider.courseDetailsApiResModel.record?.courseDescription}',
+                style: TextStyle(
+                  color: AppColor.textColorDark,
+                  fontSize: 14,
+                  fontFamily: 'Lato',
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ),
+            SizedBox(height: 16),
 
             /// Course heading
             Padding(
@@ -143,14 +141,14 @@ class _MyCoursesDetailsScreenState extends State<MyCoursesDetailsScreen> {
 
             Expanded(
               child: ListView.builder(
-                itemCount:
-                    courseProvider.courseDetailsApiResModel.videos?.length,
+                itemCount: courseProvider
+                    .courseDetailsApiResModel.record?.courses?.length,
                 shrinkWrap: true,
                 padding: EdgeInsets.only(left: 16, right: 16, top: 16),
                 physics: const BouncingScrollPhysics(),
                 itemBuilder: (context, index) {
-                  final item =
-                      courseProvider.courseDetailsApiResModel.videos?[index];
+                  final item = courseProvider
+                      .courseDetailsApiResModel.record?.courses?[index];
                   return Container(
                     margin: EdgeInsets.only(bottom: 16),
                     padding: EdgeInsets.all(14),
@@ -172,7 +170,7 @@ class _MyCoursesDetailsScreenState extends State<MyCoursesDetailsScreen> {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(14),
                             child: Image.network(
-                              'https://dhanvan.in/public/images/upload/prod_default.png',
+                              'https://static.vecteezy.com/system/resources/thumbnails/001/505/014/small_2x/video-player-icon-free-vector.jpg',
                               height: 100,
                               fit: BoxFit.fill,
                               errorBuilder: (context, error, stackTrace) =>
@@ -209,7 +207,9 @@ class _MyCoursesDetailsScreenState extends State<MyCoursesDetailsScreen> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              VideoPlayerScreen()));
+                                              VideoPlayerScreen(
+                                                videoUrl: "${item?.videoUrl}",
+                                              )));
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: AppColor.primaryColor,

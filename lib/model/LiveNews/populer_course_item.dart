@@ -1,4 +1,5 @@
 class PopulerCourseItem {
+  String populerCourseId;
   String populerImageUrl;
   String populerCourseTitle;
   String populerCourseDescription;
@@ -6,6 +7,7 @@ class PopulerCourseItem {
   String populerCourseCategory;
 
   PopulerCourseItem({
+    required this.populerCourseId,
     required this.populerImageUrl,
     required this.populerCourseTitle,
     required this.populerCourseDescription,

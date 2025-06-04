@@ -23,8 +23,8 @@ class HomeScreenRecentlyAddedCourses extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => HomeScreenRecentlyCoursesDetails(
-              pageTitle:
-                  homeProvider.recenthlyAddedCourses[index].populerCourseTitle,
+              courseId:
+                  homeProvider.recenthlyAddedCourses[index].populerCourseId,
             ),
           ),
         );
