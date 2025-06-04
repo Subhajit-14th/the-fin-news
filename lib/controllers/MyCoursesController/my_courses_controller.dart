@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:the_fin_news/model/MyCourses/course_details_api_res_model.dart';
+import 'package:the_fin_news/model/MyCourses/my_course_details_api_res_model.dart';
 import 'package:the_fin_news/model/MyCourses/my_courses_api_res_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:the_fin_news/services/hive_database.dart';
@@ -41,17 +41,14 @@ class MyCoursesController {
   }
 
   /// get course details
-  Future<CourseDetailsApiResModel> getCourseDetails(courseId) async {
-    CourseDetailsApiResModel courseDetailsApiResModel =
-        CourseDetailsApiResModel();
+  Future<MyCourseDetailsApiResModel> getMyCourseDetails(courseId) async {
+    MyCourseDetailsApiResModel courseDetailsApiResModel =
+        MyCourseDetailsApiResModel();
     try {
-      var headers = {'Authorization': 'Basic Og=='};
       var request = http.Request(
           'GET',
           Uri.parse(
-              'https://smartstylin.in/fin/admin/course-details.php?course_id=19'));
-
-      request.headers.addAll(headers);
+              'https://smartstylin.in/fin/admin/course-wise-videodetails.php?course_id=$courseId'));
 
       http.StreamedResponse response = await request.send();
 
@@ -59,12 +56,12 @@ class MyCoursesController {
         final jsonData = await response.stream.bytesToString();
         debugPrint("jsonData: ${jsonData.toString()}");
         courseDetailsApiResModel =
-            CourseDetailsApiResModel.fromJson(jsonDecode(jsonData));
+            MyCourseDetailsApiResModel.fromJson(jsonDecode(jsonData));
       } else {
         final jsonData = await response.stream.bytesToString();
         debugPrint("jsonData: ${jsonData.toString()}");
         courseDetailsApiResModel =
-            CourseDetailsApiResModel.fromJson(jsonDecode(jsonData));
+            MyCourseDetailsApiResModel.fromJson(jsonDecode(jsonData));
         debugPrint(
             'My courses API Error: ${response.statusCode} - ${response.reasonPhrase}');
       }

@@ -101,12 +101,13 @@ class HomeScreenPopulerCourses extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Text(
                     homeProvider.populerCourses[index].populerCourseDescription,
+                    maxLines: 2,
                     style: TextStyle(
-                      color: AppColor.textColorDark,
-                      fontSize: 16,
-                      fontFamily: 'Lato',
-                      fontWeight: FontWeight.w500,
-                    ),
+                        color: AppColor.textColorDark,
+                        fontSize: 16,
+                        fontFamily: 'Lato',
+                        fontWeight: FontWeight.w500,
+                        overflow: TextOverflow.ellipsis),
                   ),
                 ),
                 SizedBox(height: height * 0.02),

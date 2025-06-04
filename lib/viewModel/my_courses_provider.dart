@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:the_fin_news/controllers/MyCoursesController/my_courses_controller.dart';
-import 'package:the_fin_news/model/MyCourses/course_details_api_res_model.dart';
-import 'package:the_fin_news/model/MyCourses/my_courses_api_res_model.dart';
+import 'package:the_fin_news/model/MyCourses/my_course_details_api_res_model.dart';
+import 'package:the_fin_news/model/MyCourses/my_courses_api_res_model.dart'
+    as mycourse;
 
 class MyCoursesProvider extends ChangeNotifier {
   bool _isLoadMyCourses = false;
@@ -10,14 +11,14 @@ class MyCoursesProvider extends ChangeNotifier {
   bool _isLoadMyCoursesDetails = false;
   bool get isLoadMyCoursesDetails => _isLoadMyCoursesDetails;
 
-  List<Courses?> _myCoursesList = [];
-  List<Courses?> get myCoursesList => _myCoursesList;
+  List<mycourse.Courses?> _myCoursesList = [];
+  List<mycourse.Courses?> get myCoursesList => _myCoursesList;
 
   final MyCoursesController _myCoursesController = MyCoursesController();
-  StudentWiseBatchCourseApiResModel studentWiseBatchCourseApiResModel =
-      StudentWiseBatchCourseApiResModel();
-  CourseDetailsApiResModel courseDetailsApiResModel =
-      CourseDetailsApiResModel();
+  mycourse.StudentWiseBatchCourseApiResModel studentWiseBatchCourseApiResModel =
+      mycourse.StudentWiseBatchCourseApiResModel();
+  MyCourseDetailsApiResModel courseDetailsApiResModel =
+      MyCourseDetailsApiResModel();
 
   /// fetch my courses list
   void fetchMyCoursesList() async {
@@ -40,11 +41,11 @@ class MyCoursesProvider extends ChangeNotifier {
   }
 
   /// fetch my course details
-  void fetchCourseDetails(courseId) async {
+  void fetchMyCourseDetails(courseId) async {
     _isLoadMyCoursesDetails = true;
     notifyListeners();
     courseDetailsApiResModel =
-        await _myCoursesController.getCourseDetails(courseId);
+        await _myCoursesController.getMyCourseDetails(courseId);
     if (courseDetailsApiResModel.status == 200) {
       _isLoadMyCoursesDetails = false;
       notifyListeners();

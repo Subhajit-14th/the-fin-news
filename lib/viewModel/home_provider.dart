@@ -76,6 +76,7 @@ class HomeProvider extends ChangeNotifier {
         (element) {
           debugPrint("Popular Course ID: ${element.id}, Title: ");
           _populerCourses.add(PopulerCourseItem(
+            populerCourseId: element.id ?? '',
             populerImageUrl: element.coursePhoto ?? '',
             populerCourseTitle: element.courseTitle ?? '',
             populerCourseDescription: element.courseDescription ?? '',
@@ -89,6 +90,7 @@ class HomeProvider extends ChangeNotifier {
         (element) {
           debugPrint("Popular Course ID: ${element.id}, Title: ");
           _recenthlyAddedCourses.add(PopulerCourseItem(
+            populerCourseId: element.id ?? '',
             populerImageUrl: element.coursePhoto ?? '',
             populerCourseTitle: element.courseTitle ?? '',
             populerCourseDescription: element.courseDescription ?? '',

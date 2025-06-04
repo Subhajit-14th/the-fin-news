@@ -23,12 +23,23 @@ class StudentWiseBatchCourseApiResModel {
 }
 
 class Record {
+  String? batchId;
+  String? batchStartDate;
+  String? batchEndDate;
   String? studentName;
   List<Courses>? courses;
 
-  Record({this.studentName, this.courses});
+  Record(
+      {this.batchId,
+      this.batchStartDate,
+      this.batchEndDate,
+      this.studentName,
+      this.courses});
 
   Record.fromJson(Map<String, dynamic> json) {
+    batchId = json['batch_id'];
+    batchStartDate = json['batch_start_date'];
+    batchEndDate = json['batch_end_date'];
     studentName = json['student_name'];
     if (json['courses'] != null) {
       courses = <Courses>[];
@@ -40,6 +51,9 @@ class Record {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['batch_id'] = batchId;
+    data['batch_start_date'] = batchStartDate;
+    data['batch_end_date'] = batchEndDate;
     data['student_name'] = studentName;
     if (courses != null) {
       data['courses'] = courses!.map((v) => v.toJson()).toList();
