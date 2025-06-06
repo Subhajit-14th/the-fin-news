@@ -15,9 +15,12 @@ class _HomeScreenReportsState extends State<HomeScreenReports> {
   @override
   void initState() {
     super.initState();
-    if (!mounted) return;
-
-    context.read<ReportsProvider>().fetchReports("", "");
+    Future.microtask(
+      () {
+        if (!mounted) return;
+        context.read<ReportsProvider>().fetchReports("", "");
+      },
+    );
   }
 
   @override

@@ -25,7 +25,7 @@ class _HomeScreenLiveNewsState extends State<HomeScreenLiveNews> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 150,
+      height: 120,
       child: Consumer<LiveNewsProvider>(
           builder: (context, liveNewsProvider, child) {
         if (liveNewsProvider.isLiveNewsLoading) {
@@ -76,15 +76,15 @@ class _HomeScreenLiveNewsState extends State<HomeScreenLiveNews> {
                   /// News Time, category and share button
                   Row(
                     children: [
-                      Text(
-                        liveNewsProvider.liveNewsItems[index].liveNewsTime,
-                        style: TextStyle(
-                          color: AppColor.textColorDark,
-                          fontSize: 14,
-                          fontFamily: 'Lato',
-                        ),
-                      ),
-                      SizedBox(width: 16),
+                      // Text(
+                      //   liveNewsProvider.liveNewsItems[index].liveNewsTime,
+                      //   style: TextStyle(
+                      //     color: AppColor.textColorDark,
+                      //     fontSize: 14,
+                      //     fontFamily: 'Lato',
+                      //   ),
+                      // ),
+                      // SizedBox(width: 16),
                       Container(
                         padding: EdgeInsets.all(4),
                         decoration: BoxDecoration(
