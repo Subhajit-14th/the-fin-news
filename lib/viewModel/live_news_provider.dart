@@ -55,6 +55,7 @@ class LiveNewsProvider extends ChangeNotifier {
       liveNewsDataApiResModel.record?.forEach(
         (element) {
           _liveNewsItems.add(LiveNewsItems(
+            liveNewsId: element.id ?? '',
             liveNewsTitle: element.livenewsTitle ?? '',
             liveNewsTime: "",
             liveNewsCategory: element.livenewsCategory ?? '',
@@ -62,6 +63,7 @@ class LiveNewsProvider extends ChangeNotifier {
         },
       );
       _isLiveNewsLoading = false;
+      getFilterLiveNewsData('');
       notifyListeners();
     } else {
       // Handle the case where the API call was not successful
@@ -91,5 +93,34 @@ class LiveNewsProvider extends ChangeNotifier {
       debugPrint(
           'Failed to fetch live news category: ${liveNewsTypeApiResModel.msg}');
     }
+  }
+
+  String _filterLiveNewsTitle = "";
+  String get filterLiveNewsTitle => _filterLiveNewsTitle;
+  String _filterLiveNewsTime = "";
+  String get filterLiveNewsTime => _filterLiveNewsTime;
+  String _filterLiveNewsCategory = "";
+  String get filterLiveNewsCategory => _filterLiveNewsCategory;
+
+  bool _isFilterNewsLoad = false;
+  bool get isFilterNewsLoad => _isFilterNewsLoad;
+
+  void getFilterLiveNewsData(id) {
+    _filterLiveNewsTitle = liveNewsItems
+        .firstWhere(
+          (element) => element.liveNewsId == id,
+        )
+        .liveNewsTitle;
+    _filterLiveNewsCategory = _liveNewsItems
+        .firstWhere(
+          (element) => element.liveNewsId == id,
+        )
+        .liveNewsCategory;
+    _filterLiveNewsTime = _liveNewsItems
+        .firstWhere(
+          (element) => element.liveNewsId == id,
+        )
+        .liveNewsTime;
+    notifyListeners();
   }
 }
