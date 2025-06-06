@@ -33,6 +33,7 @@ class _HomeScreenRecentlyCoursesDetailsState
     return Consumer<CourseProvider>(builder: (context, courseProvider, child) {
       if (courseProvider.isCourseDetailsLoading) {
         return Scaffold(
+          backgroundColor: AppColor.tertiaryColor,
           body: Center(
             child: CircularProgressIndicator(
               color: AppColor.primaryColor,

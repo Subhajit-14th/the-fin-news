@@ -16,9 +16,12 @@ class _ReportsScreenState extends State<ReportsScreen> {
   @override
   void initState() {
     super.initState();
-    if (!mounted) return;
-
-    context.read<ReportsProvider>().fetchReportCategory();
+    Future.microtask(
+      () {
+        if (!mounted) return;
+        context.read<ReportsProvider>().fetchReportCategory();
+      },
+    );
   }
 
   @override

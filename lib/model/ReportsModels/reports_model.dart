@@ -1,4 +1,5 @@
 class ReportsModel {
+  String id;
   String reportsImage;
   String reprtsTitle;
   String reportsDuration;
@@ -6,6 +7,7 @@ class ReportsModel {
   String reportsCategory;
 
   ReportsModel({
+    required this.id,
     required this.reportsImage,
     required this.reprtsTitle,
     required this.reportsDuration,

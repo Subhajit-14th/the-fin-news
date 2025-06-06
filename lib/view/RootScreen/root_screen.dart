@@ -3,11 +3,17 @@ import 'package:provider/provider.dart';
 import 'package:the_fin_news/utils/assets/app_colors.dart';
 import 'package:the_fin_news/view/CoursesScreen/courses_screen.dart';
 import 'package:the_fin_news/view/HomeScreen/home_screen.dart';
+import 'package:the_fin_news/view/HomeScreen/home_screen_recently_courses_details.dart';
+import 'package:the_fin_news/view/LiveNews/filter_live_news_screen.dart';
 import 'package:the_fin_news/view/LiveNews/live_news_screen.dart';
 import 'package:the_fin_news/view/MerketData/merket_data_screen.dart';
+import 'package:the_fin_news/view/ReportsScreen/filter_report_details_screen.dart';
 import 'package:the_fin_news/view/ReportsScreen/reports_screen.dart';
 import 'package:the_fin_news/view/RootScreen/drawer_screen.dart';
+import 'package:the_fin_news/viewModel/home_provider.dart';
 import 'package:the_fin_news/viewModel/screen_route_provider.dart';
+import 'package:the_fin_news/model/LoginModel/global_search_api_res_model.dart'
+    as models;
 
 class RootScreen extends StatefulWidget {
   const RootScreen({super.key});
@@ -21,15 +27,31 @@ class _RootScreenState extends State<RootScreen> {
   final TextEditingController _searchController = TextEditingController();
   final FocusNode _searchFocusNode = FocusNode();
 
-  final List<String> _allSuggestions = [
-    'Dubai',
-    'Doha',
-    'Dammam',
-    'Delhi',
-    'Darjeeling',
-    'Damascus',
-    'Dallas',
-  ];
+  String getDisplayType(String? source) {
+    switch (source) {
+      case 'add_course':
+        return 'Course';
+      case 'add_report':
+        return 'Report';
+      case 'add_livenews':
+        return 'Live News';
+      case 'add_blog':
+        return 'Blog';
+      default:
+        return 'Unknown';
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(
+      () {
+        if (!mounted) return;
+        context.read<HomeProvider>().getGlobalData("a");
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,68 +60,130 @@ class _RootScreenState extends State<RootScreen> {
       backgroundColor: AppColor.textColorLight,
       appBar: AppBar(
         backgroundColor: AppColor.tertiaryColor,
-        automaticallyImplyLeading: _isSearching ? false : true,
-        title: _isSearching
-            ? RawAutocomplete<String>(
-                textEditingController: _searchController,
-                focusNode: _searchFocusNode,
-                optionsBuilder: (TextEditingValue textEditingValue) {
-                  if (textEditingValue.text.isEmpty) {
-                    return const Iterable<String>.empty();
-                  }
-                  return _allSuggestions.where((String option) {
-                    return option
-                        .toLowerCase()
-                        .contains(textEditingValue.text.toLowerCase());
-                  });
-                },
-                fieldViewBuilder:
-                    (context, controller, focusNode, onFieldSubmitted) {
-                  return TextField(
-                    controller: controller,
-                    focusNode: focusNode,
-                    autofocus: true,
-                    decoration: const InputDecoration(
-                      hintText: 'Search location',
-                      border: InputBorder.none,
+        automaticallyImplyLeading: screenRouteProvider.currentCount == 0
+            ? _isSearching
+                ? false
+                : true
+            : true,
+        title: screenRouteProvider.currentCount == 0
+            ? _isSearching
+                ? RawAutocomplete<models.Record>(
+                    textEditingController: _searchController,
+                    focusNode: _searchFocusNode,
+                    displayStringForOption: (models.Record option) =>
+                        option.title ?? '',
+                    optionsBuilder: (TextEditingValue textEditingValue) {
+                      if (textEditingValue.text.isEmpty) {
+                        return const Iterable<models.Record>.empty();
+                      }
+                      return context.read<HomeProvider>().allSuggestions.where(
+                          (record) => (record.title ?? '')
+                              .toLowerCase()
+                              .contains(textEditingValue.text.toLowerCase()));
+                    },
+                    fieldViewBuilder:
+                        (context, controller, focusNode, onFieldSubmitted) {
+                      return TextField(
+                          controller: controller,
+                          focusNode: focusNode,
+                          autofocus: true,
+                          decoration: const InputDecoration(
+                            hintText: 'Search',
+                            border: InputBorder.none,
+                          ),
+                          style: const TextStyle(
+                            color: Colors.black,
+                          ),
+                          onChanged: (value) async {
+                            debugPrint("Myword is: $value");
+                            setState(() {});
+                            await context
+                                .read<HomeProvider>()
+                                .getGlobalData(value);
+                          });
+                    },
+                    optionsViewBuilder: (context, onSelected, options) {
+                      return StatefulBuilder(builder: (context, setState) {
+                        return Align(
+                          alignment: Alignment.topLeft,
+                          child: Material(
+                            elevation: 4.0,
+                            child: Container(
+                              width: double.infinity,
+                              constraints: const BoxConstraints(maxHeight: 200),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: ListView.builder(
+                                itemCount: options.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  final option = options.elementAt(index);
+                                  return ListTile(
+                                    title: Text(option.title ?? ''),
+                                    subtitle:
+                                        Text(getDisplayType(option.source)),
+                                    onTap: () {
+                                      onSelected(option);
+                                      _searchFocusNode.unfocus();
+                                      final type =
+                                          getDisplayType(option.source);
+
+                                      debugPrint(
+                                          "My option is: ${option.title}, $type");
+                                      _searchController.clear();
+
+                                      if (type == 'Course') {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                HomeScreenRecentlyCoursesDetails(
+                                              courseId: "${option.id}",
+                                            ),
+                                          ),
+                                        );
+                                      } else if (type == 'Live News') {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                FilterLiveNewsScreen(
+                                              id: "${option.id}",
+                                            ),
+                                          ),
+                                        );
+                                      } else if (type == 'Report') {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                FilterReportDetailsScreen(
+                                              id: "${option.id}",
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                    },
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                        );
+                      });
+                    },
+                  )
+                : Text(
+                    screenRouteProvider
+                        .screenNames[screenRouteProvider.currentCount],
+                    style: TextStyle(
+                      color: AppColor.textColorDark,
+                      fontSize: 18,
+                      fontFamily: 'Raleway',
+                      fontWeight: FontWeight.bold,
                     ),
-                    style: const TextStyle(
-                      color: Colors.black,
-                    ),
-                  );
-                },
-                optionsViewBuilder: (context, onSelected, options) {
-                  return Align(
-                    alignment: Alignment.topLeft,
-                    child: Material(
-                      elevation: 4.0,
-                      child: Container(
-                        width: double.infinity,
-                        constraints: const BoxConstraints(maxHeight: 200),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: ListView.builder(
-                          padding: EdgeInsets.only(right: 14),
-                          physics: const BouncingScrollPhysics(),
-                          itemCount: options.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            final option = options.elementAt(index);
-                            return ListTile(
-                              tileColor: Colors.white,
-                              title: Text(option),
-                              onTap: () {
-                                onSelected(option);
-                              },
-                            );
-                          },
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              )
+                  )
             : Text(
                 screenRouteProvider
                     .screenNames[screenRouteProvider.currentCount],

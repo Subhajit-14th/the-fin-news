@@ -77,6 +77,7 @@ class ReportsProvider extends ChangeNotifier {
       reportsApiResModel.record?.forEach(
         (element) {
           _reportsItems.add(ReportsModel(
+              id: element.id ?? '',
               reportsImage: element.reportImage ?? '',
               reprtsTitle: element.reportTitle ?? '',
               reportsDuration: element.postedTimeAgo ?? '',
@@ -92,5 +93,31 @@ class ReportsProvider extends ChangeNotifier {
       notifyListeners();
       debugPrint('Failed to fetch reports: ${reportsApiResModel.msg}');
     }
+  }
+
+  String _filterReportTitle = "";
+  String get filterReportTitle => _filterReportTitle;
+
+  String _filterReportImage = "";
+  String get filterReportImage => _filterReportImage;
+
+  String _filterReportDuration = "";
+  String get filterReportDuration => _filterReportDuration;
+
+  String _filterReportDescription = "";
+  String get filterReportDescription => _filterReportDescription;
+
+  /// filter reports
+  void filterReports(id) async {
+    _filterReportTitle =
+        _reportsItems.firstWhere((element) => element.id == id).reprtsTitle;
+    _filterReportImage =
+        _reportsItems.firstWhere((element) => element.id == id).reportsImage;
+    _filterReportDuration =
+        _reportsItems.firstWhere((element) => element.id == id).reportsDuration;
+    _filterReportDescription = _reportsItems
+        .firstWhere((element) => element.id == id)
+        .reportsDescription;
+    notifyListeners();
   }
 }

@@ -4,6 +4,7 @@ import 'package:the_fin_news/model/HomeScreenModels/home_screen_api_res_model.da
 import 'package:the_fin_news/model/HomeScreenModels/home_screen_carosel_slider_model.dart';
 import 'package:the_fin_news/model/LiveNews/live_news_social_items.dart';
 import 'package:the_fin_news/model/LiveNews/populer_course_item.dart';
+import 'package:the_fin_news/model/LoginModel/global_search_api_res_model.dart';
 
 class HomeProvider extends ChangeNotifier {
   final List<HomeScreenCaroselSliderModel> _homeCarouselImageUrls = [];
@@ -48,7 +49,14 @@ class HomeProvider extends ChangeNotifier {
   bool _isHomeDataLoading = false;
   bool get isHomeDataLoading => _isHomeDataLoading;
 
+  bool _isGlobalDataLoading = false;
+  bool get isGlobalDataLoading => _isGlobalDataLoading;
+
+  List<Record> _allSuggestions = [];
+  List<Record> get allSuggestions => _allSuggestions;
+
   HomeApiResModel homeApiResModel = HomeApiResModel();
+  GlobalSearchApiResModel globalSearchApiResModel = GlobalSearchApiResModel();
   final HomeController _homeController = HomeController();
 
   void getHomeData() async {
@@ -106,5 +114,33 @@ class HomeProvider extends ChangeNotifier {
       _isHomeDataLoading = false;
     }
     notifyListeners();
+  }
+
+  Future<void> getGlobalData(query) async {
+    debugPrint("Function is hit");
+    _isGlobalDataLoading = true;
+    notifyListeners();
+    globalSearchApiResModel = await _homeController.getGlobalSearchData(query);
+    if (globalSearchApiResModel.status == 200) {
+      debugPrint("Step one");
+      _allSuggestions.clear();
+      debugPrint("Step: ${_allSuggestions.length}");
+      globalSearchApiResModel.record?.forEach(
+        (element) {
+          _allSuggestions.add(Record(
+            id: element.id,
+            source: element.source,
+            title: element.title,
+          ));
+          notifyListeners();
+        },
+      );
+      _isGlobalDataLoading = false;
+      notifyListeners();
+    } else {
+      debugPrint("Failed to fetch global data: ${globalSearchApiResModel.msg}");
+      _isGlobalDataLoading = false;
+      notifyListeners();
+    }
   }
 }
