@@ -3,8 +3,25 @@ import 'package:provider/provider.dart';
 import 'package:the_fin_news/utils/assets/app_colors.dart';
 import 'package:the_fin_news/viewModel/merketdata_provider.dart';
 
-class MerketDataScreen extends StatelessWidget {
+class MerketDataScreen extends StatefulWidget {
   const MerketDataScreen({super.key});
+
+  @override
+  State<MerketDataScreen> createState() => _MerketDataScreenState();
+}
+
+class _MerketDataScreenState extends State<MerketDataScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(
+      () {
+        if (!mounted) return;
+        context.read<MerketdataProvider>().getMarketCategoryData();
+        context.read<MerketdataProvider>().getMarketData();
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +40,7 @@ class MerketDataScreen extends StatelessWidget {
               builder: (context, marketDataProvider, child) {
             return Row(
               children: List.generate(
-                marketDataProvider.metketDataHeadingItems.length,
+                marketDataProvider.metketDataHeadingCategoryItems.length,
                 (index) {
                   return InkWell(
                     onTap: () {
@@ -44,7 +61,8 @@ class MerketDataScreen extends StatelessWidget {
                             : BorderRadius.zero,
                       ),
                       child: Text(
-                        marketDataProvider.metketDataHeadingItems[index],
+                        marketDataProvider
+                            .metketDataHeadingCategoryItems[index],
                         style: TextStyle(
                           fontSize: 16,
                           color: marketDataProvider.selectedIndex == index
@@ -76,7 +94,7 @@ class MerketDataScreen extends StatelessWidget {
                   children: [
                     /// Date
                     Text(
-                      marketDataProvider.marketData[index]['date'],
+                      "${marketDataProvider.marketData[index].date}",
                       style: TextStyle(
                         color: AppColor.textColorDark,
                         fontFamily: 'Lato',
@@ -98,7 +116,7 @@ class MerketDataScreen extends StatelessWidget {
                           children: <TextSpan>[
                             TextSpan(
                               text:
-                                  "${marketDataProvider.marketData[index]['nifty']['value']}",
+                                  "${marketDataProvider.marketData[index].value1}",
                               style: TextStyle(
                                 color: AppColor.textColorDark,
                                 fontWeight: FontWeight.bold,
@@ -106,7 +124,7 @@ class MerketDataScreen extends StatelessWidget {
                             ),
                             TextSpan(
                               text:
-                                  ' ${marketDataProvider.marketData[index]['nifty']['change']}(${marketDataProvider.marketData[index]['nifty']['percent']})',
+                                  ' ${marketDataProvider.marketData[index].value2}(${marketDataProvider.marketData[index].value3})',
                               style: TextStyle(
                                 fontStyle: FontStyle.italic,
                                 color: Colors.red,
@@ -146,10 +164,11 @@ class MerketDataScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              "${marketDataProvider.marketData[index]['fiiCash']}",
+                              "${marketDataProvider.marketData[index].price}",
                               style: TextStyle(
-                                color: marketDataProvider.marketData[index]
-                                            ['fiiCash'] <
+                                color: double.parse(marketDataProvider
+                                                .marketData[index].price ??
+                                            '') <
                                         0
                                     ? Color(0xffFF1818)
                                     : Color(0xFF39FF14),
@@ -198,10 +217,10 @@ class MerketDataScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              "${marketDataProvider.marketData[index]['diiCash']}",
+                              "${marketDataProvider.marketData[index].price2}",
                               style: TextStyle(
-                                color: marketDataProvider.marketData[index]
-                                            ['diiCash'] <
+                                color: double.parse(
+                                            '${marketDataProvider.marketData[index].price2}') <
                                         0
                                     ? Colors.red
                                     : Colors.green,
@@ -237,7 +256,7 @@ class MerketDataScreen extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            "${marketDataProvider.marketData[index]['net']}",
+                            "669.6",
                             style: TextStyle(
                               color: Colors.green,
                               fontSize: 16,

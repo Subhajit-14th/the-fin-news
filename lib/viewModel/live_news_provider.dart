@@ -46,6 +46,7 @@ class LiveNewsProvider extends ChangeNotifier {
   void fetchLiveNewsData(liveNewsCategoryId, liveNewsCategoryName) async {
     _isLiveNewsLoading = true;
     notifyListeners();
+    debugPrint("This is my live news DATA");
     liveNewsDataApiResModel = await _liveNewsController.getLiveNewsData(
       liveNewsCategoryId: liveNewsCategoryId,
       liveNewsCateName: liveNewsCategoryName,
@@ -63,7 +64,6 @@ class LiveNewsProvider extends ChangeNotifier {
         },
       );
       _isLiveNewsLoading = false;
-      getFilterLiveNewsData('');
       notifyListeners();
     } else {
       // Handle the case where the API call was not successful
@@ -77,6 +77,7 @@ class LiveNewsProvider extends ChangeNotifier {
 
   /// fetch live news category
   void fetchLiveNewsCategory() async {
+    debugPrint("This is my live news category");
     liveNewsTypeApiResModel = await _liveNewsController.getLiveNewsCategory();
     if (liveNewsTypeApiResModel.status == 200) {
       _liveNewsCategory.clear();
