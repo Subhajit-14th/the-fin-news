@@ -8,6 +8,7 @@ import 'package:the_fin_news/view/HomeScreen/home_screen_recently_added_courses.
 import 'package:the_fin_news/view/HomeScreen/home_screen_reports_data.dart';
 import 'package:the_fin_news/view/HomeScreen/live_news_section.dart';
 import 'package:the_fin_news/viewModel/home_provider.dart';
+import 'package:the_fin_news/viewModel/merketdata_provider.dart';
 import 'package:the_fin_news/viewModel/screen_route_provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -25,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
       () {
         if (!mounted) return;
         context.read<HomeProvider>().getHomeData();
+        context.read<MerketdataProvider>().getMarketData();
       },
     );
   }
